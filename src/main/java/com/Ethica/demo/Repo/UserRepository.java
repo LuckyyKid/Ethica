@@ -1,6 +1,6 @@
-package Repo;
+package com.Ethica.demo.Repo;
 
-import Entity.User;
+import com.Ethica.demo.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,7 +16,7 @@ public interface UserRepository extends JpaRepository<User, Long>{
     public String FindByEmail(@Param("email") String nom);
 
     @Query("SELECT u FROM User u WHERE u.email = :email And u.password = :password  ")
-    public String FindByEmailPassword(@Param("email")String email ,@Param("password")  String  password);
+    public User FindByEmailPassword(@Param("email")String email ,@Param("password")  String  password);
 
 
 

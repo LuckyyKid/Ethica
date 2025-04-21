@@ -1,4 +1,4 @@
-package Entity;
+package com.Ethica.demo.Entity;
 
 import jakarta.persistence.*;
 

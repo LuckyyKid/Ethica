@@ -5,6 +5,33 @@
     <title>Title</title>
 </head>
 <body>
+<form action="/signUP" method="post">
+    <label>Prénom :</label>
+    <input type="text" name="firstName" required><br>
 
+    <label>Nom :</label>
+    <input type="text" name="lastName" required><br>
+
+    <label>Email :</label>
+    <input type="email" name="email" required><br>
+
+    <label>Mot de passe :</label>
+    <input type="password" name="password" required><br>
+
+    <label>Âge :</label>
+    <input type="number" name="age" required><br>
+
+    <label>Profil d’investisseur :</label>
+    <select name="investorProfil" required>
+        <option value="conservateur">Conservateur</option>
+        <option value="modere">Modéré</option>
+        <option value="dynamique">Dynamique</option>
+    </select><br>
+
+    <label>Description :</label><br>
+    <textarea name="description" rows="4" cols="50" required></textarea><br>
+
+    <button type="submit">S’inscrire</button>
+</form>
 </body>
 </html>

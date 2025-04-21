@@ -1,6 +1,6 @@
-package Service;
+package com.Ethica.demo.Service;
 
-import Repo.UserRepository;
+import com.Ethica.demo.Repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,8 @@ public class AuthService {
     private UserRepository userRepository;
 
     public Boolean checkUser(String email,String password){
-    if(userRepository.FindByEmailPassword(email,password)!=null){
+        boolean user = userRepository.FindByEmailPassword(email,password)!=null;
+    if(user){
         return true;
     }
     return false;
