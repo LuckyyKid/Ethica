@@ -12,4 +12,9 @@ public class UserController {
         return "index";
     }
 
+    @GetMapping("/index")
+    public String  showPageHome(){
+        return "index";
+    }
+
 }

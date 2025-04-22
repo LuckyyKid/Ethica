@@ -2,11 +2,62 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Accueil|Ethica</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-<h2>Bonjour Tout le monde Bienvenue Sur Ethica</h2>
-<a th:href="@{/login}">Connexion</a>
-<a th:href="@{/signUp}">Sign Up</a>
+<header>
+    <nav>
+        <ul class="nav">
+
+                 <li><a th:href="@{/index}">Home</a></li>
+                 <li><a th:href="@{/about}">About Us</a></li>
+                <li><a th:href="@{/founder}">Price</a></li>
+                 <li><a th:href="@{/news}">News Article</a></li>
+                <li><a th:href="@{/signUp}">Sign Up</a></li>
+                <li><a th:href="@{/login}">Sign In</a></li>
+         </ul>
+    </nav>
+</header>
+
+<div class="hero">
+    <img src="https://www.onefamilyadviser.com/assets/2024/08/OFA-over50s-product-banner-image.png" alt="Bannière Ethica">
+    <h1>Investissez selon qui vous êtes</h1>
+    <p>Une plateforme qui aligne vos convictions avec vos décisions financières.</p>
+    <button><a th:href="@{/signUp}">Créer mon profil</a></button>
+</div>
+
+<section class="theme-section">
+    <div class="image">
+        <!-- Image à gauche -->
+        <img src="https://www.onefamilyadviser.com/assets/2024/08/OFA-LTM-product-banner-image.png" alt="Valeurs alignées" />
+    </div>
+    <div class="text">
+        <h2>Donner du sens à vos investissements</h2>
+        <p>Ethica vous permet de filtrer le marché selon ce qui vous tient à cœur : religion, environnement, santé, inclusion, ou tout simplement la logique.</p>
+    </div>
+</section>
+
+<section class="how-it-works" id="how">
+    <h2>Comment ça fonctionne</h2>
+    <div class="steps">
+        <div class="step">
+            <img src="@{/images/step1.svg}" alt="Profil" />
+            <h3>1. Créez votre profil</h3>
+            <p>Un court questionnaire pour cerner vos valeurs et votre style d’investisseur.</p>
+        </div>
+        <div class="step">
+            <img src="@{/images/step2.svg}" alt="Analyse IA" />
+            <h3>2. Analyse personnalisée</h3>
+            <p>Notre IA sélectionne les actifs qui matchent vos principes et votre tolérance au risque.</p>
+        </div>
+        <div class="step">
+            <img src="@{/images/step3.svg}" alt="Investir" />
+            <h3>3. Investissez en toute cohérence</h3>
+            <p>Suivez un portefeuille aligné, évolutif, et compréhensible à chaque instant.</p>
+        </div>
+    </div>
+</section>
+
 </body>
 </html>
