@@ -1,5 +1,7 @@
 package com.Ethica.demo.Controller;
 
+import com.Ethica.demo.Entity.User;
+import com.Ethica.demo.Repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AddUserControlleur {
 
+    @Autowired
+    private UserRepository userRepository;
 
 
 
@@ -18,8 +22,16 @@ public class AddUserControlleur {
     }
 
     @PostMapping("/signUP")
-    public String addUser(@RequestParam String firstName, @RequestParam String lastName ,@RequestParam String email, @RequestParam String password, @RequestParam String passwordConfirm, @RequestParam String age, @RequestParam String investorProfil){
-
+    public String addUser(@RequestParam String firstName, @RequestParam String lastName , @RequestParam String email, @RequestParam String password, @RequestParam String age, @RequestParam String investorProfil, @RequestParam String description){
+        User user = new User();
+        user.setFirstName(firstName);
+        user.setName(lastName);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setAge(Integer.parseInt(age));
+        user.setInvestorProfil(investorProfil);
+        user.setDescription(description);
+        userRepository.save(user);
         return "login";
     }
 }
