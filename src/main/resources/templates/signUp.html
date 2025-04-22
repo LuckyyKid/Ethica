@@ -6,18 +6,25 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-<nav>
-    <ul class="nav">
-        <li><a th:href="@{/index}">Home</a></li>
-        <li><a th:href="@{/about}">About Us</a></li>
-        <li><a th:href="@{/founder}">Price</a></li>
-        <li><a th:href="@{/news}">News Article</a></li>
-        <li><a th:href="@{/signUp}">Sign Up</a></li>
-        <li><a th:href="@{/login}">Sign In</a></li>
-    </ul>
-</nav>
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a th:href="@{/}" class="logo-text">Ethica</a>
+        </div>
+        <ul class="nav">
+            <li><a th:href="@{/index}">Home</a></li>
+            <li><a th:href="@{/about}">About Us</a></li>
+            <li><a th:href="@{/founder}">Price</a></li>
+            <li><a th:href="@{/news}">News Article</a></li>
+            <li><a th:href="@{/signUp}">Sign Up</a></li>
+            <li><a th:href="@{/login}">Sign In</a></li>
+        </ul>
+    </nav>
+</header>
 
-<form action="/signUP" method="post">
+
+<div class="form">
+    <form action="/signUP" method="post">
     <label>Prénom :</label>
     <input type="text" name="firstName" required><br>
 
@@ -40,10 +47,11 @@
         <option value="dynamique">Dynamique</option>
     </select><br>
 
-    <label>Description :</label><br>
+    <label>Give us a quick Description of yourself :</label><br>
     <textarea name="description" rows="4" cols="50" required></textarea><br>
 
     <button type="submit">S’inscrire</button>
-</form>
+    </form>
+</div>
 </body>
 </html>
