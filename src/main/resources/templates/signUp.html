@@ -24,34 +24,60 @@
 
 
 <div class="form">
-    <form action="/signUP" method="post">
-    <label>Prénom :</label>
+    <form id="signUpForm" action="/signUP" method="post">
+    <label>First Name :</label>
     <input type="text" name="firstName" required><br>
 
-    <label>Nom :</label>
+    <label>Last Name :</label>
     <input type="text" name="lastName" required><br>
 
     <label>Email :</label>
     <input type="email" name="email" required><br>
 
-    <label>Mot de passe :</label>
+    <label> Password :</label>
     <input type="password" name="password" required><br>
 
-    <label>Âge :</label>
+    <label>Age :</label>
     <input type="number" name="age" required><br>
 
-    <label>Profil d’investisseur :</label>
-    <select name="investorProfil" required>
-        <option value="conservateur">Conservateur</option>
-        <option value="modere">Modéré</option>
-        <option value="dynamique">Dynamique</option>
+    <label>Investor Profil :</label>
+    <select name="InvestorProfil" required>
+        <option value="conservateur">Conservative</option>
+        <option value="modere">Moderate</option>
+        <option value="dynamique">Risky</option>
     </select><br>
 
     <label>Give us a quick Description of yourself :</label><br>
     <textarea name="description" rows="4" cols="50" required></textarea><br>
 
-    <button type="submit">S’inscrire</button>
+    <button type="submit">Sign Up</button>
     </form>
 </div>
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-left">
+            <h4>Ethica</h4>
+            <p>&copy; 2025 Ethica Inc. All rights reserved.</p>
+        </div>
+
+        <div class="footer-links">
+            <ul>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/terms">Terms of Use</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-socials">
+            <p>Follow us</p>
+            <a href="https://linkedin.com" target="_blank">LinkedIn</a> |
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
 </body>
 </html>

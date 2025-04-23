@@ -1,5 +1,6 @@
 package com.Ethica.demo.Service;
 
+import com.Ethica.demo.Entity.User;
 import com.Ethica.demo.Repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,4 +18,7 @@ public class AuthService {
     }
     return false;
 }
+    public User getUserByEmailPassword(String email, String password) {
+        return userRepository.FindByEmailPassword(email, password);
+    }
 }

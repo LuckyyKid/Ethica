@@ -218,6 +218,53 @@ img {
 .form button:hover {
     background-color: #6dbdc2;
 }
+.footer {
+    background-color: #1F2A44;
+    color: white;
+    padding: 40px 20px;
+    font-size: 14px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.footer-left h4 {
+    margin: 0 0 10px;
+    font-size: 20px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 8px;
+}
+
+.footer-links a,
+.footer-socials a {
+    text-decoration: none;
+    color: #8FD4D9;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover,
+.footer-socials a:hover {
+    color: white;
+}
+
+.footer-socials p {
+    margin: 0 0 10px;
+}
 
 
 /* Responsive */

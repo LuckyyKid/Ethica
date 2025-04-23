@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>Connexion</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
 </head>
 <body>
 <header>
@@ -21,8 +20,39 @@
         </ul>
     </nav>
 </header>
+<div class="Welcome"> <h2 th:text="'Hello ' + ${session.userConnecte.firstName} + ', welcome on Ethica'"></h2> </div>
 
-<h2>Hello Bienvenue sur Ethica !</h2>
+<main class="dashboard">
 
-</body>
-</html>
+    <!-- Search Bar -->
+    <section id="search-bar" class="search-section">
+        <h2>Search for an asset</h2>
+        <input type="text" placeholder="Enter the name or symbol of an asset...">
+        <button type="submit">Search</button>
+    </section>
+
+    <!-- Latest Reuters Articles -->
+    <section id="articles-recents" class="news-section">
+        <h2>Financial News (Reuters)</h2>
+        <div class="articles-grid">
+
+            <div class="news-card">
+                <h3>Article Title</h3>
+                <p>Short summary or intro of the article...</p>
+                <a href="https://www.reuters.com/" target="_blank">Read more</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Access to features (redirections) -->
+    <section id="redirect-sections" class="menu-links">
+        <h2>Available features</h2>
+        <ul>
+            <li><a href="/profil">Complete my personality profile</a></li>
+            <li><a href="/portfolio">Manage my portfolio</a></li>
+            <li><a href="/performers">Top assets for my profile</a></li>
+            <li><a href="/chat">Chat with the financial AI</a></li>
+            <li><a href="/recap">Market summary</a></li>
+            <li><a href="/justification">Submit a buy/sell decision</a></li>
+        </ul>
+    </section>

@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long>{
        public String VerifyUser(@Param("firstName") String firstName);
 
     @Query("SELECT u FROM User u WHERE u.email = :email")
-    public String FindByEmail(@Param("email") String nom);
+    public User FindByEmail(@Param("email") String email);
 
     @Query("SELECT u FROM User u WHERE u.email = :email And u.password = :password  ")
     public User FindByEmailPassword(@Param("email")String email ,@Param("password")  String  password);

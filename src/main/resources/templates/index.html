@@ -14,7 +14,7 @@
         <ul class="nav">
             <li><a th:href="@{/index}">Home</a></li>
             <li><a th:href="@{/about}">About Us</a></li>
-            <li><a th:href="@{/founder}">Price</a></li>
+            <li><a th:href="@{/founder}">Dashboard</a></li>
             <li><a th:href="@{/news}">News Article</a></li>
             <li><a th:href="@{/signUp}">Sign Up</a></li>
             <li><a th:href="@{/login}">Sign In</a></li>
@@ -23,9 +23,9 @@
 </header>
 <div class="hero">
     <img src="https://www.onefamilyadviser.com/assets/2024/08/OFA-over50s-product-banner-image.png" alt="Bannière Ethica">
-    <h1>Investissez selon qui vous êtes</h1>
-    <p>Une plateforme qui aligne vos convictions avec vos décisions financières.</p>
-    <button><a th:href="@{/signUp}">Créer mon profil</a></button>
+    <h1>Invest according to who you are and what you stand for</h1>
+    <p>A platform that aligns your values with your financial decisions.</p>
+    <button><a th:href="@{/signUp}">Create my profil</a></button>
 </div>
 
 <section class="theme-section">
@@ -34,35 +34,58 @@
         <img src="https://www.onefamilyadviser.com/assets/2024/08/OFA-LTM-product-banner-image.png" alt="Valeurs alignées" />
     </div>
     <div class="text">
-        <h2>Donner du sens à vos investissements</h2>
-        <p>Ethica vous permet de filtrer le marché selon ce qui vous tient à cœur : religion, environnement, santé, inclusion, ou tout simplement la logique.</p>
+        <h2>Give meaning to your investments</h2>
+        <p>Ethica allows you to filter the market based on what matters to you: religion, environment, health, inclusion, or simply logic.</p>
+
     </div>
 </section>
 
 <section class="how-it-works" id="how">
-    <h2>Comment ça fonctionne</h2>
+    <h2>How it works</h2>
     <div class="steps">
         <div class="step">
             <img src="data:image/jpeg;base64,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" alt="Profil" />
-            <h3>1. Créez votre profil</h3>
-            <p>Un court questionnaire pour cerner vos valeurs et votre style d’investisseur.</p>
+            <h3>1. Create your profile</h3>
+            <p>A short questionnaire to identify your values and investor style.</p>
         </div>
         <div class="step">
             <img src="data:image/png;base64,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" alt="Analyse IA" />
-            <h3>2. Analyse personnalisée</h3>
-            <p>Notre IA sélectionne les actifs qui matchent vos principes et votre tolérance au risque.</p>
+            <h3>2. Personalized analysis</h3>
+            <p>Our AI selects assets that match your principles and risk tolerance.</p>
         </div>
         <div class="step">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0WsFrZ_Iej-4JXh5FVf9Nn3tQq3ozwP9dIQ&s" alt="Investir" />
-            <h3>3. Investissez en toute cohérence</h3>
-            <p>Suivez un portefeuille aligné, évolutif, et compréhensible à chaque instant.</p>
+            <h3>3. Invest with full consistency</h3>
+            <p>Follow a portfolio that is aligned, adaptive, and easy to understand at any time.</p>
         </div>
     </div>
 </section>
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-left">
+            <h4>Ethica</h4>
+            <p>&copy; 2025 Ethica Inc. All rights reserved.</p>
+        </div>
 
+        <div class="footer-links">
+            <ul>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/terms">Terms of Use</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-socials">
+            <p>Follow us</p>
+            <a href="https://linkedin.com" target="_blank">LinkedIn</a> |
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
