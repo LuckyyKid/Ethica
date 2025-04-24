@@ -26,10 +26,18 @@
 
     <!-- Search Bar -->
     <section id="search-bar" class="search-section">
+        <form th:action="@{/dashboard}" method="get">
         <h2>Search for an asset</h2>
-        <input type="text" placeholder="Enter the name or symbol of an asset...">
+        <input type="text" name="ticker" th:value="${param.ticker}" placeholder="Enter the name or symbol of an asset AAPL">
         <button type="submit">Search</button>
+        </form>
     </section>
+    <div th:if="${stock!= null}">
+    <head><title>Result</title></head>
+    <h1>Result for <span th:text="${stock.symbol}" ></span></h1>
+        <p>Price: <span th:text="${stock.price + ' $'}"></span></p>
+    </div>
+    <p th:if="${error}" th:text="${error}"></p>
 
     <!-- Latest Reuters Articles -->
     <section id="articles-recents" class="news-section">
