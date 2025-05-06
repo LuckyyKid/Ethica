@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Ajouter un actif - Ethica</title>
+    <title>Ajouter une transaction - Ethica</title>
     <link rel="stylesheet" th:href="@{/css/trading.css}" />
 </head>
 <body>
@@ -24,24 +24,30 @@
 
 <main>
     <section class="form">
-        <h2>Ajouter un actif à votre portefeuille</h2>
+        <h2>Ajouter une transaction (achat ou vente)</h2>
 
         <p th:if="${success}" th:text="${success}" style="text-align:center; color: green; font-weight: bold;"></p>
 
-        <form th:action="@{/portfolio/add}" method="post">
+        <form th:action="@{/trades/add}" method="post">
             <label for="symbol">Symbole</label>
             <input type="text" id="symbol" name="symbol" placeholder="ex : AAPL" required />
 
-            <label for="purchasePrice">Buying Price</label>
-            <input type="number" step="0.01" id="purchasePrice" name="purchasePrice" required />
+            <label for="priceAtExecution">Prix au moment du trade</label>
+            <input type="number" step="0.01" id="priceAtExecution" name="priceAtExecution" required />
 
-            <label for="quantity">Quantity</label>
+            <label for="quantity">Quantité</label>
             <input type="number" step="0.01" id="quantity" name="quantity" required />
 
-            <label for="decisionReason">Reason for Buy or Sell</label>
-            <textarea id="decisionReason" name="decisionReason" placeholder="Explain your decision..."></textarea>
+            <label for="type">Type de transaction</label>
+            <select id="type" name="type" required>
+                <option value="BUY">Achat</option>
+                <option value="SELL">Vente</option>
+            </select>
 
-            <button type="submit">Add to portfolio</button>
+            <label for="decisionReason">Raison</label>
+            <textarea id="decisionReason" name="decisionReason" placeholder="Expliquez votre décision..."></textarea>
+
+            <button type="submit">Ajouter la transaction</button>
         </form>
     </section>
 </main>
