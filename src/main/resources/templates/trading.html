@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un actif - Ethica</title>
+    <link rel="stylesheet" th:href="@{/css/trading.css}" />
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a th:href="@{/}" class="logo-text">Ethica</a>
+        </div>
+        <ul class="nav">
+            <li><a th:href="@{/index}">Home</a></li>
+            <li><a th:href="@{/about}">About Us</a></li>
+            <li><a th:href="@{/founder}">Price</a></li>
+            <li><a th:href="@{/news}">News</a></li>
+            <li><a th:href="@{/signUp}">Sign Up</a></li>
+            <li><a th:href="@{/login}">Deconnexion</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="form">
+        <h2>Ajouter un actif à votre portefeuille</h2>
+
+        <p th:if="${success}" th:text="${success}" style="text-align:center; color: green; font-weight: bold;"></p>
+
+        <form th:action="@{/portfolio/add}" method="post">
+            <label for="symbol">Symbole</label>
+            <input type="text" id="symbol" name="symbol" placeholder="ex : AAPL" required />
+
+            <label for="purchasePrice">Buying Price</label>
+            <input type="number" step="0.01" id="purchasePrice" name="purchasePrice" required />
+
+            <label for="quantity">Quantity</label>
+            <input type="number" step="0.01" id="quantity" name="quantity" required />
+
+            <label for="decisionReason">Reason for Buy or Sell</label>
+            <textarea id="decisionReason" name="decisionReason" placeholder="Explain your decision..."></textarea>
+
+            <button type="submit">Add to portfolio</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>
