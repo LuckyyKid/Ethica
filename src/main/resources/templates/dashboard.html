@@ -16,7 +16,7 @@
             <li><a th:href="@{/founder}">Price</a></li>
             <li><a th:href="@{/news}">News Article</a></li>
             <li><a th:href="@{/signUp}">Sign Up</a></li>
-            <li><a th:href="@{/login}">Sign In</a></li>
+            <li><a th:href="@{/login}">Deconnexion</a></li>
         </ul>
     </nav>
 </header>
@@ -32,10 +32,10 @@
         <button type="submit">Search</button>
         </form>
     </section>
-    <div th:if="${stock!= null}">
-    <head><title>Result</title></head>
+    <div class="result" th:if="${stock!= null}">
     <h1>Result for <span th:text="${stock.symbol}" ></span></h1>
         <p>Price: <span th:text="${stock.price + ' $'}"></span></p>
+        <p>percent Change: <span th:text="${stock.percentChange + ' %'}"></span></p>
     </div>
     <p th:if="${error}" th:text="${error}"></p>
 

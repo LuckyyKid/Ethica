@@ -7,10 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import yahoofinance.Stock;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 
 @Controller
 public class SearchStockControlleur {
@@ -25,13 +23,14 @@ public class SearchStockControlleur {
         }
 
         try {
-            Stock stock = stockService.getStock(ticker.toUpperCase());
-            if (stock == null || stock.getQuote().getPrice() == null) {
+            StockDTO stock = stockService.getStock(ticker.toUpperCase());
+
+            if (stock == null || stock.getPrice() == 0.0) {
                 model.addAttribute("error", "No result found for: " + ticker);
                 return "dashboard";
             }
 
-            model.addAttribute("stock", new StockDTO(stock.getSymbol(), stock.getQuote().getPrice()));
+            model.addAttribute("stock", stock);
         } catch (IOException e) {
             model.addAttribute("error", "An error occurred while retrieving data for: " + ticker);
         }
@@ -39,4 +38,3 @@ public class SearchStockControlleur {
         return "dashboard";
     }
 }
-
