@@ -17,6 +17,11 @@ public class ClientPortfolio {
     @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
     private List<Trade> trades;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+
     // Getters/setters
     public Long getId() {
         return id;

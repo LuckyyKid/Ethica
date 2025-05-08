@@ -2,12 +2,11 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Portefeuille - Ethica</title>
+    <title>Mon Portefeuille - Ethica</title>
     <link rel="stylesheet" th:href="@{/css/clientPortfolio.css}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-
 <header>
     <nav class="navbar">
         <div class="logo">
@@ -19,47 +18,85 @@
             <li><a th:href="@{/founder}">Price</a></li>
             <li><a th:href="@{/news}">News</a></li>
             <li><a th:href="@{/signUp}">Sign Up</a></li>
-            <li><a th:href="@{/login}">Déconnexion</a></li>
+            <li><a th:href="@{/login}">Deconnexion</a></li>
         </ul>
     </nav>
 </header>
 
-<main class="chart-container">
-    <h2>Évolution de votre portefeuille</h2>
-    <canvas id="portfolioChart" width="800" height="400"></canvas>
+<main class="dashboard-container">
+    <!-- Colonne gauche : graphique -->
+    <div class="left-panel">
+        <h2>Évolution de votre solde</h2>
+        <canvas id="balanceChart" width="400" height="300"></canvas>
+    </div>
+
+    <!-- Colonne droite : historique des trades -->
+    <div class="right-panel">
+        <h2>Transactions récentes</h2>
+        <table class="trade-table">
+            <thead>
+            <tr>
+                <th>Type</th>
+                <th>Symbole</th>
+                <th>Quantité</th>
+                <th>Valeur ($)</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="trade : ${trades}">
+                <td th:text="${trade.buy} ? 'Buy' : 'Sell'"></td>
+                <td th:text="${trade.symbol}"></td>
+                <td th:text="${trade.quantity}"></td>
+                <td th:text="${#numbers.formatDecimal(trade.quantity * trade.priceAtExecution, 1, 'POINT', 2, 'NONE')}"></td>
+                <td th:text="${#temporals.format(trade.timestamp, 'dd/MM/yyyy HH:mm')}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="buttons">
+            <a th:href="@{/trading}" class="btn">Acheter</a>
+            <a th:href="@{/trading}" class="btn">Vendre</a>
+        </div>
+    </div>
 </main>
 
 <script>
-    const ctx = document.getElementById('portfolioChart').getContext('2d');
+    const ctx = document.getElementById('balanceChart').getContext('2d');
+    const balanceData = /*[[${balancesJson}]]*/ '[]';
+    const parsedData = JSON.parse(balanceData);
 
-    const portfolioChart = new Chart(ctx, {
+    const chart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'],
+            labels: parsedData.map(point => point.date),
             datasets: [{
-                label: 'Valeur du portefeuille ($)',
-                data: [1200, 1500, 1400, 1800, 1750, 2000],
+                label: 'Balance ($)',
+                data: parsedData.map(point => point.balance),
                 borderColor: '#8FD4D9',
-                backgroundColor: 'rgba(143, 212, 217, 0.2)',
-                tension: 0.3,
                 fill: true,
-                pointRadius: 5,
-                pointHoverRadius: 8
+                tension: 0.3
             }]
         },
         options: {
             responsive: true,
             scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
                 y: {
-                    beginAtZero: false,
-                    ticks: {
-                        callback: value => `$${value}`
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Solde ($)'
                     }
                 }
             }
         }
     });
 </script>
-
 </body>
 </html>
