@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Mon Portefeuille - Ethica</title>
+    <title>My portfolio - Ethica</title>
     <link rel="stylesheet" th:href="@{/css/clientPortfolio.css}">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
@@ -26,20 +26,20 @@
 <main class="dashboard-container">
     <!-- Graph -->
     <div class="left-panel">
-        <h2>Évolution de votre solde</h2>
+        <h2>Evolution of your balance</h2>
         <div id="balanceChart" style="width: 100%; height: 400px;"></div>
     </div>
 
-    <!-- Historique des trades -->
+    <!-- trades history -->
     <div class="right-panel">
-        <h2>Transactions récentes</h2>
+        <h2>Most recent Transactions</h2>
         <table class="trade-table">
             <thead>
             <tr>
                 <th>Type</th>
                 <th>Symbole</th>
-                <th>Quantité</th>
-                <th>Valeur ($)</th>
+                <th>Quantity</th>
+                <th>Value ($)</th>
                 <th>Date</th>
             </tr>
             </thead>
@@ -55,8 +55,8 @@
         </table>
 
         <div class="buttons">
-            <a th:href="@{/trading}" class="btn">Acheter</a>
-            <a th:href="@{/trading}" class="btn">Vendre</a>
+            <a th:href="@{/trading}" class="btn">Buy</a>
+            <a th:href="@{/trading}" class="btn">Sell</a>
         </div>
     </div>
 </main>
@@ -72,12 +72,12 @@
 
         const data = new google.visualization.DataTable();
         data.addColumn('string', 'Date');
-        data.addColumn('number', 'Solde ($)');
+        data.addColumn('number', 'Balance ($)');
 
         parsed.forEach(p => data.addRow([p.date, p.balance]));
 
         const options = {
-            title: 'Évolution du solde',
+            title: 'Evolution of your balance',
             curveType: 'function',
             legend: { position: 'bottom' },
             backgroundColor: 'transparent',

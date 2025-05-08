@@ -36,6 +36,10 @@
     <h1>Result for <span th:text="${stock.symbol}" ></span></h1>
         <p>Price: <span th:text="${stock.price + ' $'}"></span></p>
         <p>percent Change: <span th:text="${stock.percentChange + ' %'}"></span></p>
+        <div class="buttons">
+            <a th:href="@{/trading}" class="btn">Acheter</a>
+            <a th:href="@{/trading}" class="btn">Vendre</a>
+        </div>
     </div>
     <p th:if="${error}" th:text="${error}"></p>
 
