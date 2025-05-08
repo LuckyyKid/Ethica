@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>portfolio</title>
+    <title>Portefeuille - Ethica</title>
+    <link rel="stylesheet" th:href="@{/css/clientPortfolio.css}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+
 <header>
     <nav class="navbar">
         <div class="logo">
@@ -16,9 +19,47 @@
             <li><a th:href="@{/founder}">Price</a></li>
             <li><a th:href="@{/news}">News</a></li>
             <li><a th:href="@{/signUp}">Sign Up</a></li>
-            <li><a th:href="@{/login}">Deconnexion</a></li>
+            <li><a th:href="@{/login}">Déconnexion</a></li>
         </ul>
     </nav>
 </header>
+
+<main class="chart-container">
+    <h2>Évolution de votre portefeuille</h2>
+    <canvas id="portfolioChart" width="800" height="400"></canvas>
+</main>
+
+<script>
+    const ctx = document.getElementById('portfolioChart').getContext('2d');
+
+    const portfolioChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'],
+            datasets: [{
+                label: 'Valeur du portefeuille ($)',
+                data: [1200, 1500, 1400, 1800, 1750, 2000],
+                borderColor: '#8FD4D9',
+                backgroundColor: 'rgba(143, 212, 217, 0.2)',
+                tension: 0.3,
+                fill: true,
+                pointRadius: 5,
+                pointHoverRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    ticks: {
+                        callback: value => `$${value}`
+                    }
+                }
+            }
+        }
+    });
+</script>
+
 </body>
 </html>

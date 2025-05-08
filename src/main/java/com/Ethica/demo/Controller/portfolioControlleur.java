@@ -13,6 +13,7 @@ public class portfolioControlleur {
 
     @GetMapping("/clientPortfolio")
     public String showPortfolio() {
+
         return "clientPortfolio";
     }
 }
