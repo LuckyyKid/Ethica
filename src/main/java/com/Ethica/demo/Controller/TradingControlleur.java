@@ -52,7 +52,7 @@ public class TradingControlleur {
         ClientPortfolio clientPortfolio = portfolioServices.getCurrentPortfolio(currentUser);
         trade.setPortfolio(clientPortfolio);
         tradeService.handleTradeSubmission(trade);
-        return "clientPortfolio";
+        return "redirect:/clientPortfolio";
     }
 
 

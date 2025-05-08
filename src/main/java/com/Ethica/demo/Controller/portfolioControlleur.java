@@ -49,18 +49,20 @@ public class portfolioControlleur {
             balance += trade.isBuy() ? delta : -delta;
 
             Map<String, Object> point = new HashMap<>();
-            point.put("date", trade.getTimestamp().toLocalDate().toString());
+            point.put("date", trade.getTimestamp().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
             point.put("balance", balance);
             chartPoints.add(point);
         }
 
 
         ObjectMapper mapper = new ObjectMapper();
-        String balancesJson = mapper.writeValueAsString(chartPoints);
 
-        model.addAttribute("portfolio", portfolio);
-        model.addAttribute("trades", trades);
+        String balancesJson = mapper.writeValueAsString(chartPoints);
         model.addAttribute("balancesJson", balancesJson);
+        model.addAttribute("trades", trades);
+        model.addAttribute("portfolio", portfolio);
+
+
 
         return "clientPortfolio";
     }
