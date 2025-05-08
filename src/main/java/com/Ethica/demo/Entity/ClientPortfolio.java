@@ -54,4 +54,12 @@ public class ClientPortfolio {
     public void setTrades(List<Trade> trades) {
         this.trades = trades;
     }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

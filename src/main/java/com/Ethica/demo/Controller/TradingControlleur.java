@@ -48,10 +48,9 @@ public class TradingControlleur {
         trade.setQuantity(Double.parseDouble(quantity));
         trade.setDecisionReason(decisionReason);
         trade.setBuy(type.equalsIgnoreCase("buy"));
-        tradingRepository.save(trade);
+        trade.setTimestamp(LocalDateTime.now());
         ClientPortfolio clientPortfolio = portfolioServices.getCurrentPortfolio(currentUser);
         trade.setPortfolio(clientPortfolio);
-
         tradeService.handleTradeSubmission(trade);
         return "clientPortfolio";
     }

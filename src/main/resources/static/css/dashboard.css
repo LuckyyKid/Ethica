@@ -149,3 +149,30 @@ body {
 .menu-links li a:hover {
     background-color: #152030;
 }
+.result {
+    max-width: 500px;
+    margin: 40px auto; /* centre horizontalement */
+    padding: 30px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.result:hover {
+    transform: translateY(-4px);
+}
+
+.result h1 {
+    font-size: 24px;
+    color: #1F2A44;
+    margin-bottom: 20px;
+}
+
+.result p {
+    font-size: 18px;
+    color: #333;
+    margin: 10px 0;
+}
+
