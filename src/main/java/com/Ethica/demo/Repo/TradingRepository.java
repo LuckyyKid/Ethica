@@ -11,4 +11,5 @@ import java.util.List;
 public interface TradingRepository extends JpaRepository<Trade,Long> {
 
     List<Trade> findByPortfolioOrderByTimestampAsc(ClientPortfolio portfolio);
+
 }
