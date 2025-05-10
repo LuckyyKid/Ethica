@@ -31,7 +31,7 @@ public class portfolioControlleur {
         User currentUser = (User) session.getAttribute("userConnecte");
 
         if (currentUser == null) {
-            return "redirect:/login"; // Redirection si non connecté
+            return "redirect:/login";
         }
 
 

@@ -14,7 +14,7 @@ public class portfolioService {
 
     public ClientPortfolio getCurrentPortfolio(User sessionUser) {
         return portfolioRepository.findByUser(sessionUser)
-                .orElseThrow(() -> new RuntimeException("Aucun portfolio trouvé pour cet utilisateur."));
+                .orElseThrow(() -> new RuntimeException("No portfolio found for this user."));
 }
     public ClientPortfolio getOrCreatePortfolio(User user) {
         return portfolioRepository.findByUser(user).orElseGet(() -> {
