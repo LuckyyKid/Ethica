@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Recommendations - Ethica</title>
+    <link rel="stylesheet" th:href="@{/css/recommendations.css}">
+</head>
+<body>
+<header class="navbar">
+    <div class="logo"><a href="/">Ethica</a></div>
+    <ul class="nav">
+        <li><a href="/dashboard">Home</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/founder">Price</a></li>
+        <li><a href="/news">News</a></li>
+        <li><a href="/signUp">Sign Up</a></li>
+        <li><a href="/login">Deconnexion</a></li>
+    </ul>
+</header>
+
+<main class="recommendation-container">
+    <h2>Recommended Stocks for You</h2>
+    <div class="recommendation-list" id="recommendation-list">
+        <!-- JavaScript will inject recommendations here -->
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-left">
+            <h4>Ethica</h4>
+            <p>&copy; 2025 Ethica Inc. All rights reserved.</p>
+        </div>
+        <div class="footer-links">
+            <ul>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/terms">Terms of Use</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-socials">
+            <p>Follow us</p>
+            <a href="https://linkedin.com" target="_blank">LinkedIn</a> |
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    fetch('/api/scoring', { method: 'POST' })
+        .then(res => res.text())
+        .then(text => JSON.parse(text))
+        .then(data => {
+            const list = document.getElementById('recommendation-list');
+            data.forEach(stock => {
+                const card = document.createElement('div');
+                card.className = 'stock-card';
+                card.innerHTML = `
+                <h3>${stock.name} <span>(${stock.symbol})</span></h3>
+                <p>Compatibility Score: <strong>${(stock.score * 100).toFixed(0)}%</strong></p>
+            `;
+                list.appendChild(card);
+            });
+        })
+        .catch(err => {
+            document.getElementById('recommendation-list').innerHTML = '<p>Error loading recommendations.</p>';
+        });
+</script>
+</body>
+</html>

@@ -10,10 +10,13 @@ public class Trade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(nullable = false, length = 50)
     private String symbol;
+    @Column(nullable = false, length = 50)
     private double priceAtExecution;
+    @Column(nullable = false, length = 50)
     private double quantity;
+    @Column(nullable = false, length = 50)
     private String decisionReason;
 
 

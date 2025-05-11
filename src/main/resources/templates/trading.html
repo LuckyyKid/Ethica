@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Ajouter une transaction - Ethica</title>
@@ -48,6 +48,7 @@
             <textarea id="decisionReason" name="decisionReason" placeholder="Explain your decision..."></textarea>
 
             <button type="submit"><a th:href="@{/clientPortfolio}">Add Transaction</a></button>
+            <button type="submit"><a th:href="@{/dashboard}">Exit</a></button>
         </form>
     </section>
 </main>

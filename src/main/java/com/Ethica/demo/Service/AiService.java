@@ -32,11 +32,11 @@ public class AiService {
 
         List<Map<String, String>> messages = new ArrayList<>();
         messages.add(Map.of("role", "system", "content",
-                "You're a financial analyst. You never give investment advice. You explain how recent economic events can impact a given portfolio.keep it short but detailed"));
+                "You're a financial analyst. You never give investment advice. You explain how recent economic events can impact a given portfolio take macro and geopolitical events in count .keep it short but detailed max 100 words with good spacing,keep in mind your are talking to an bigenner in investement so dont use complicated words  "));
         messages.add(Map.of("role", "user", "content",
                 "Here are the user's latest transactions :\n" + userPortfolioSummary +
                         "\n\nHere's his question : " + userQuestion +
-                        "\n\nClearly explains what has happened in the markets and the possible impact on its portfolio.keep it short but detailed"));
+                        "\n\nClearly explains what has happened in the markets and the possible impact on its portfolio ,take macro and geopolitical events in count.keep it short but detailed max 100 words with good spacing keep in mind your are talking to an bigenner in investement so dont use complicated words  "));
 
         body.put("messages", messages);
 
