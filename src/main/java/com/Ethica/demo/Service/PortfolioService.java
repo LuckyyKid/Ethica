@@ -3,14 +3,16 @@ package com.Ethica.demo.Service;
 import com.Ethica.demo.Entity.ClientPortfolio;
 import com.Ethica.demo.Entity.User;
 import com.Ethica.demo.Repo.PortfolioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class portfolioService {
+public class PortfolioService {
 
-    @Autowired
-    private PortfolioRepository portfolioRepository;
+    private final PortfolioRepository portfolioRepository;
+
+    public PortfolioService(PortfolioRepository portfolioRepository) {
+        this.portfolioRepository = portfolioRepository;
+    }
 
     public ClientPortfolio getCurrentPortfolio(User sessionUser) {
         return portfolioRepository.findByUser(sessionUser)
