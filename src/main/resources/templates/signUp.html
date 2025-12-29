@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -26,30 +26,30 @@
 <div class="form">
     <form id="signUpForm" action="/signUP" method="post">
 
-        <label>First Name :</label>
-        <input type="text" name="firstName" required><br>
+        <label for="FirstName">First Name :</label>
+        <input type="text" id="FirstName" name="firstName" required><br>
 
-        <label>Last Name :</label>
-        <input type="text" name="lastName" required><br>
+        <label for="LastName">Last Name :</label>
+        <input type="text" id="LastName" name="lastName" required><br>
 
-        <label>Email :</label>
-        <input type="email" name="email" required><br>
+        <label for="Email">Email :</label>
+        <input type="email" id="Email" name="email" required><br>
 
-        <label>Password :</label>
-        <input type="password" name="password" required><br>
+        <label for="password">Password :</label>
+        <input type="password" id="password" name="password" required><br>
 
-        <label>Age :</label>
-        <input type="number" name="age" required><br>
+        <label for="Age">Age :</label>
+        <input type="number" id="Age" name="age" required><br>
 
-        <label>Investor Profil :</label>
-        <select name="InvestorProfil" required>
+        <label for="Investor Profil">Investor Profil :</label>
+        <select name="InvestorProfil" id="Investor Profil" required>
             <option value="conservateur">Conservative</option>
             <option value="modere">Moderate</option>
             <option value="dynamique">Risky</option>
         </select><br>
 
-        <label>Give us a quick Description of yourself :</label><br>
-        <textarea name="description" rows="4" cols="50" required></textarea><br>
+        <label for="Description">Give us a quick Description of yourself :</label><br>
+        <textarea name="description" id="Description" rows="4" cols="50" required></textarea><br>
 
         <button type="submit">Sign Up</button>
     </form>
