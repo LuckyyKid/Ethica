@@ -32,10 +32,10 @@ public class AuthController {
         User user = authService.getUserByEmailPassword(email, password);
 
         if (user != null) {
-            // Session (en mémoire du serveur)
+            // Session
             session.setAttribute("userConnecte", user);
 
-            // Cookie (en mémoire dans le navigateur)
+            // Cookies
             Cookie emailCookie = new Cookie("utilisateurEmail", user.getEmail());
             emailCookie.setMaxAge(60 * 60 * 24); // 1 jour
             emailCookie.setPath("/");
