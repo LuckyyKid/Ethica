@@ -2,23 +2,19 @@ package com.Ethica.demo.Service;
 
 import com.Ethica.demo.Entity.User;
 import com.Ethica.demo.Repo.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public Boolean checkUser(String email,String password){
-        boolean user = userRepository.FindByEmailPassword(email,password)!=null;
-    if(user){
-        return true;
+    public AuthService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
-    return false;
-}
+
     public User getUserByEmailPassword(String email, String password) {
-        return userRepository.FindByEmailPassword(email, password);
+        return userRepository.findByEmailAndPassword(email, password)
+                .orElse(null);
     }
 }
