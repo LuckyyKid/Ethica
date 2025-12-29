@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>My portfolio - Ethica</title>
     <link rel="stylesheet" th:href="@{/css/clientPortfolio.css}">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
 <header>
@@ -27,7 +27,9 @@
     <!-- Graph -->
     <div class="left-panel">
         <h2>Evolution of your balance</h2>
-        <div id="balanceChart" style="width: 100%; height: 400px;"></div>
+        <div style="position: relative; height: 400px; width: 100%;">
+            <canvas id="balanceChart"></canvas>
+        </div>
     </div>
 
     <!-- trades history -->
@@ -64,32 +66,162 @@
     </div>
 </main>
 
-<!-- SCRIPT GOOGLE CHART -->
+<!-- SCRIPT CHART.JS -->
 <script th:inline="javascript">
-    google.charts.load('current', {packages: ['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
+    document.addEventListener('DOMContentLoaded', function() {
+        const canvas = document.getElementById('balanceChart');
+        if (!canvas) {
+            console.error('Canvas element not found. Cannot draw chart.');
+            return;
+        }
 
-    function drawChart() {
-        const rawData = /*[[${balancesJson}]]*/ '[]';
-        const parsed = JSON.parse(rawData);
+        // --- CORRECTION DE L'INJECTION DE DONNÉES THYMELEAF ---
+        // Utilisation de la méthode recommandée par Thymeleaf pour JSON
+        const rawData = /*[[${balancesJson}]]*/ null;
 
-        const data = new google.visualization.DataTable();
-        data.addColumn('string', 'Date');
-        data.addColumn('number', 'Balance ($)');
+        // S'assurer que les données sont valides et non nulles (pour le cas où Thymeleaf retourne null)
+        let parsed;
+        try {
+            parsed = rawData ? JSON.parse(rawData) : [];
+        } catch (e) {
+            console.error('Error parsing JSON data from Thymeleaf:', e);
+            parsed = [];
+        }
 
-        parsed.forEach(p => data.addRow([p.date, p.balance]));
+        console.log('Parsed data:', parsed); // Debug
 
-        const options = {
-            title: 'Evolution of your balance',
-            curveType: 'function',
-            legend: { position: 'bottom' },
-            backgroundColor: 'transparent',
-            colors: ['#8FD4D9']
-        };
+        if (parsed.length === 0) {
+            // Afficher un message dans le canvas ou dans le conteneur si aucune donnée
+            console.error('No data available for chart. Drawing aborted.');
+            // Optionnel : afficher un message dans la zone du graphique
+            const chartContainer = canvas.parentElement;
+            chartContainer.innerHTML = '<div style="text-align: center; padding: 50px; color: #6B7C93;">No balance history available yet.</div>';
+            return;
+        }
 
-        const chart = new google.visualization.LineChart(document.getElementById('balanceChart'));
-        chart.draw(data, options);
-    }
+        // Extraire les dates et balances
+        const labels = parsed.map(p => p.date);
+        const balances = parsed.map(p => p.balance);
+
+        // Créer gradient pour le background
+        const ctx = canvas.getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(99, 102, 241, 0.2)');
+        gradient.addColorStop(1, 'rgba(99, 102, 241, 0.01)');
+
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Balance ($)',
+                    data: balances,
+                    borderColor: '#6366F1',
+                    backgroundColor: gradient,
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#6366F1',
+                    pointBorderColor: '#FFFFFF',
+                    pointBorderWidth: 2,
+                    pointHoverRadius: 6,
+                    pointHoverBackgroundColor: '#6366F1',
+                    pointHoverBorderColor: '#FFFFFF',
+                    pointHoverBorderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(10, 14, 39, 0.95)',
+                        titleColor: '#FFFFFF',
+                        bodyColor: '#FFFFFF',
+                        padding: 12,
+                        borderColor: '#6366F1',
+                        borderWidth: 1,
+                        displayColors: false,
+                        bodyFont: {
+                            size: 14,
+                            weight: '600'
+                        },
+                        titleFont: {
+                            size: 12,
+                            weight: '400'
+                        },
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + context.parsed.y.toLocaleString('en-US', {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                });
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            color: '#E2E8F0',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 12,
+                                family: '-apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif'
+                            },
+                            color: '#64748B',
+                            padding: 8,
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        },
+                        border: {
+                            display: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 12,
+                                family: '-apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif'
+                            },
+                            color: '#64748B',
+                            padding: 8,
+                            maxRotation: 45,
+                            minRotation: 0
+                        },
+                        border: {
+                            display: false
+                        }
+                    }
+                },
+                animation: {
+                    duration: 1500,
+                    easing: 'easeInOutQuart'
+                }
+            }
+        });
+
+        console.log('Chart created successfully');
+    });
 </script>
 </body>
 </html>

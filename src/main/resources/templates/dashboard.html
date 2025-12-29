@@ -16,11 +16,14 @@
             <li><a th:href="@{/founder}">Price</a></li>
             <li><a th:href="@{/news}">News Article</a></li>
             <li><a th:href="@{/signUp}">Sign Up</a></li>
-            <li><a th:href="@{/login}">Deconnexion</a></li>
+            <li><a th:href="@{/login}">Log out</a></li>
         </ul>
     </nav>
+    <div class="Welcome">
+        <h2 th:text="'Hello ' + ${session.userConnecte.firstName} + ', welcome on Ethica'"> Welcome on Ethica </h2>
+    </div>
 </header>
-<div class="Welcome"> <h2 th:text="'Hello ' + ${session.userConnecte.firstName} + ', welcome on Ethica'"></h2> </div>
+
 
 <main class="dashboard">
 

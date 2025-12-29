@@ -29,6 +29,7 @@
         <p th:if="${success}" th:text="${success}" style="text-align:center; color: green; font-weight: bold;"></p>
 
         <form th:action="@{/trading}" method="post">
+
             <label for="symbol">Symbol</label>
             <input type="text" id="symbol" name="symbol" placeholder="ex : AAPL" required />
 
@@ -47,9 +48,13 @@
             <label for="decisionReason">Reason</label>
             <textarea id="decisionReason" name="decisionReason" placeholder="Explain your decision..."></textarea>
 
-            <button type="submit"><a th:href="@{/clientPortfolio}">Add Transaction</a></button>
-            <button type="submit"><a th:href="@{/dashboard}">Exit</a></button>
+            <!-- vrai bouton submit -->
+            <button type="submit">Add Transaction</button>
+
+            <!-- bouton quitter = lien normal -->
+            <a th:href="@{/dashboard}" class="btn-exit">Exit</a>
         </form>
+
     </section>
 </main>
 </body>
