@@ -4,7 +4,7 @@ import com.Ethica.demo.Entity.ClientPortfolio;
 import com.Ethica.demo.Entity.User;
 import com.Ethica.demo.Repo.PortfolioRepository;
 import com.Ethica.demo.Repo.UserRepository;
-import com.Ethica.demo.Service.portfolioService;
+import com.Ethica.demo.Service.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,7 @@ public class AddUserControlleur {
     private UserRepository userRepository;
 
     @Autowired
-    private portfolioService  portfolioService;
+    private PortfolioService portfolioService;
 
     @Autowired
     PortfolioRepository portfolioRepository;

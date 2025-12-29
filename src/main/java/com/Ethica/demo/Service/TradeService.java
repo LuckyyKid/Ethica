@@ -4,17 +4,19 @@ import com.Ethica.demo.Entity.ClientPortfolio;
 import com.Ethica.demo.Entity.Trade;
 import com.Ethica.demo.Repo.PortfolioRepository;
 import com.Ethica.demo.Repo.TradingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TradeService {
 
-    @Autowired
-    private TradingRepository tradingRepository;
+    private final TradingRepository tradingRepository;
+    private final PortfolioRepository portfolioRepository;
 
-    @Autowired
-    private PortfolioRepository portfolioRepository;
+    public TradeService(TradingRepository tradingRepository,
+                        PortfolioRepository portfolioRepository) {
+        this.tradingRepository = tradingRepository;
+        this.portfolioRepository = portfolioRepository;
+    }
 
     public void updateBalanceAfterTrade(ClientPortfolio clientPortfolio, Trade trade) {
         double quantity = trade.getQuantity();
@@ -30,6 +32,7 @@ public class TradeService {
 
         portfolioRepository.save(clientPortfolio);
     }
+
     public void handleTradeSubmission(Trade trade) {
         ClientPortfolio portfolio = trade.getPortfolio();
         tradingRepository.save(trade);
