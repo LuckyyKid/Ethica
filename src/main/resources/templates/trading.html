@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Ajouter une transaction - Ethica</title>
+    <title>Trading | Ethica</title>
     <link rel="stylesheet" th:href="@{/css/trading.css}" />
 </head>
 <body>
@@ -17,7 +17,7 @@
             <li><a th:href="@{/founder}">Price</a></li>
             <li><a th:href="@{/news}">News</a></li>
             <li><a th:href="@{/signUp}">Sign Up</a></li>
-            <li><a th:href="@{/login}">Deconnexion</a></li>
+            <li><a th:href="@{/login}">Log out</a></li>
         </ul>
     </nav>
 </header>
@@ -48,10 +48,10 @@
             <label for="decisionReason">Reason</label>
             <textarea id="decisionReason" name="decisionReason" placeholder="Explain your decision..."></textarea>
 
-            <!-- vrai bouton submit -->
+            <!--  submit bouton -->
             <button type="submit">Add Transaction</button>
 
-            <!-- bouton quitter = lien normal -->
+            <!-- Exit bouton -->
             <a th:href="@{/dashboard}" class="btn-exit">Exit</a>
         </form>
 
