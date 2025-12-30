@@ -5,12 +5,14 @@ import com.Ethica.demo.Entity.Trade;
 import com.Ethica.demo.Entity.User;
 import com.Ethica.demo.Repo.TradingRepository;
 import com.Ethica.demo.Service.PortfolioService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
@@ -28,7 +30,8 @@ public class PortfolioController {
     }
 
     @GetMapping("/clientPortfolio")
-    public String showPortfolio(Model model, HttpSession session) throws Exception {
+    public String showPortfolio(Model model, HttpSession session)
+            throws JsonProcessingException {
 
         User currentUser = (User) session.getAttribute("userConnecte");
 
@@ -36,7 +39,8 @@ public class PortfolioController {
             return "redirect:/login";
         }
 
-        ClientPortfolio portfolio = portfolioService.getCurrentPortfolio(currentUser);
+        ClientPortfolio portfolio =
+                portfolioService.getCurrentPortfolio(currentUser);
 
         List<Trade> trades =
                 tradingRepository.findByPortfolioOrderByTimestampAsc(portfolio);
@@ -51,14 +55,16 @@ public class PortfolioController {
             Map<String, Object> point = new HashMap<>();
             point.put(
                     "date",
-                    trade.getTimestamp()
-                            .format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
+                    trade.getTimestamp().format(
+                            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
+                    )
             );
             point.put("balance", balance);
             chartPoints.add(point);
         }
 
-        String balancesJson = new ObjectMapper().writeValueAsString(chartPoints);
+        String balancesJson =
+                new ObjectMapper().writeValueAsString(chartPoints);
 
         model.addAttribute("balancesJson", balancesJson);
         model.addAttribute("trades", trades);
