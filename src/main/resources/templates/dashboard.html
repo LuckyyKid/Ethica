@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}"/>
     <title>Dashboard | Ethica</title>
-    <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+
 </head>
 <body>
 <header>
@@ -19,10 +20,11 @@
             <li><a th:href="@{/login}">Log out</a></li>
         </ul>
     </nav>
-    <div class="Welcome">
-        <h2 th:text="'Hello ' + ${session.userConnecte.firstName} + ', welcome on Ethica'"> Welcome on Ethica </h2>
-    </div>
+
 </header>
+<div class="Welcome">
+    <h2 th:text="'Hello ' + ${session.userConnecte.firstName} + ', welcome on Ethica'"> Welcome on Ethica </h2>
+</div>
 
 
 <main class="dashboard">
@@ -30,14 +32,14 @@
     <!-- Search Bar -->
     <section id="search-bar" class="search-section">
         <form th:action="@{/dashboard}" method="get">
-        <h2>Search for an asset</h2>
+            <h2>Search for an asset</h2>
             <label for="ticker">Asset ticker or symbol</label>
-        <input type="text" name="ticker" id="ticker" th:value="${param.ticker}" placeholder="Enter the name or symbol of an asset AAPL">
-        <button type="submit">Search</button>
+            <input type="text" name="ticker" id="ticker" th:value="${param.ticker}" placeholder="Enter the name or symbol of an asset AAPL">
+            <button type="submit">Search</button>
         </form>
     </section>
     <div class="result" th:if="${stock!= null}">
-    <h1>Result for <span th:text="${stock.symbol}" ></span></h1>
+        <h1>Result for <span th:text="${stock.symbol}" ></span></h1>
         <p>Price: <span th:text="${stock.price + ' $'}"></span></p>
         <p>percent Change: <span th:text="${stock.percentChange + ' %'}"></span></p>
         <div class="buttons">

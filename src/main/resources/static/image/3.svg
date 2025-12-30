@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+    <linearGradient id="aiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a9eff"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+    <filter id="aiGlow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="400" fill="url(#bg3)" rx="20"/>
+  
+  <!-- Circular tech pattern -->
+  <g transform="translate(200, 180)">
+    <circle r="100" fill="none" stroke="rgba(74,158,255,0.1)" stroke-width="1"/>
+    <circle r="80" fill="none" stroke="rgba(74,158,255,0.15)" stroke-width="1"/>
+    <circle r="60" fill="none" stroke="rgba(74,158,255,0.2)" stroke-width="1"/>
+    <circle r="40" fill="none" stroke="rgba(74,158,255,0.3)" stroke-width="1"/>
+    
+    <!-- Rotating dots on circles -->
+    <circle cx="100" cy="0" r="4" fill="#4a9eff" filter="url(#aiGlow)"/>
+    <circle cx="-70" cy="50" r="4" fill="#7c3aed" filter="url(#aiGlow)"/>
+    <circle cx="40" cy="-50" r="4" fill="#4a9eff" filter="url(#aiGlow)"/>
+    <circle cx="-30" cy="-35" r="3" fill="#7c3aed"/>
+  </g>
+  
+  <!-- Central AI brain icon -->
+  <g transform="translate(200, 180)">
+    <circle r="35" fill="url(#aiGrad)" filter="url(#aiGlow)"/>
+    <!-- Brain pattern -->
+    <path d="M-12,-10 Q-15,0 -10,8 M-5,-15 Q0,-5 -5,10 M5,-15 Q10,-5 5,8 M12,-8 Q15,2 10,10" 
+          stroke="rgba(255,255,255,0.8)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- Sparkle -->
+    <circle cx="10" cy="-10" r="2" fill="#fff"/>
+  </g>
+  
+  <!-- Data streams -->
+  <g stroke="url(#aiGrad)" stroke-width="2" fill="none" opacity="0.6">
+    <path d="M50,100 Q100,150 160,145" stroke-dasharray="5,5"/>
+    <path d="M350,120 Q300,160 240,150" stroke-dasharray="5,5"/>
+    <path d="M80,300 Q140,250 175,215" stroke-dasharray="5,5"/>
+    <path d="M320,280 Q280,240 230,210" stroke-dasharray="5,5"/>
+  </g>
+  
+  <!-- Input data cards -->
+  <g transform="translate(20, 80)">
+    <rect width="80" height="50" rx="8" fill="rgba(24,24,27,0.9)" stroke="rgba(74,158,255,0.3)"/>
+    <text x="40" y="22" text-anchor="middle" fill="#4a9eff" font-family="system-ui" font-size="10">INPUT</text>
+    <text x="40" y="38" text-anchor="middle" fill="#fafafa" font-family="system-ui" font-size="11">Values</text>
+  </g>
+  
+  <g transform="translate(300, 100)">
+    <rect width="80" height="50" rx="8" fill="rgba(24,24,27,0.9)" stroke="rgba(124,58,237,0.3)"/>
+    <text x="40" y="22" text-anchor="middle" fill="#7c3aed" font-family="system-ui" font-size="10">INPUT</text>
+    <text x="40" y="38" text-anchor="middle" fill="#fafafa" font-family="system-ui" font-size="11">Risk</text>
+  </g>
+  
+  <!-- Output card -->
+  <g transform="translate(130, 300)">
+    <rect width="140" height="70" rx="12" fill="rgba(24,24,27,0.9)" stroke="rgba(34,197,94,0.5)"/>
+    <text x="70" y="25" text-anchor="middle" fill="#22c55e" font-family="system-ui" font-size="10" letter-spacing="1">OUTPUT</text>
+    <text x="70" y="45" text-anchor="middle" fill="#fafafa" font-family="system-ui" font-size="13" font-weight="500">Personalized</text>
+    <text x="70" y="60" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="system-ui" font-size="11">Portfolio</text>
+  </g>
+  
+  <!-- Label -->
+  <text x="200" y="30" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="system-ui" font-size="12" letter-spacing="2">AI ANALYSIS</text>
+</svg>

@@ -1,102 +1,127 @@
-/* =====================================================
-  ETHICA - trading.css
-  Styles for the Transaction Page (Form-centric design)
-  ===================================================== */
+/* ============================================
+   ETHICA - Trading Page
+   Professional SaaS Form Design
+   ============================================ */
 
-/* ==================== CSS VARIABLES (Base) ==================== */
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* CSS Variables */
 :root {
     /* Colors */
-    --primary: #0A1628;
-    --primary-light: #1A2942;
-    --secondary: #F5F7FA;
-    --accent: #6366F1;
-    --accent-hover: #4F46E5;
-    --accent-subtle: #E8F0FF;
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #111113;
+    --bg-card: #161618;
+    --bg-input: #1a1a1c;
+
+    /* Accents */
+    --accent-green: #10b981;
+    --accent-green-light: #34d399;
+    --accent-green-bg: rgba(16, 185, 129, 0.1);
+    --accent-red: #ef4444;
+    --accent-red-bg: rgba(239, 68, 68, 0.1);
+    --accent-primary: #4a9eff;
+    --accent-secondary: #7c3aed;
+    --accent-gradient: linear-gradient(135deg, #4a9eff 0%, #7c3aed 100%);
 
     /* Glassmorphism */
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-hover: rgba(255, 255, 255, 0.06);
 
     /* Text */
-    --text-primary: #0A1628;
-    --text-secondary: #6B7C93;
-    --text-inverse: #FFFFFF;
-    --text-success: #00C48C; /* Pour les messages de succès */
-
-    /* Backgrounds */
-    --bg-primary: #FFFFFF;
-    --bg-secondary: #F5F7FA;
+    --text-primary: #fafafa;
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --text-tertiary: rgba(255, 255, 255, 0.4);
 
     /* Borders */
-    --border: #E0E6ED;
-    --border-hover: #C7D0DD;
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-medium: rgba(255, 255, 255, 0.1);
+    --border-focus: rgba(74, 158, 255, 0.5);
 
-    /* Semantic colors */
-    --success: #00C48C;
-    --error: #FF5252;
+    /* Typography */
+    --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
 
-    /* Shadows */
-    --shadow-sm: 0 2px 8px rgba(10, 22, 40, 0.04), 0 1px 3px rgba(10, 22, 40, 0.06);
-    --shadow-md: 0 4px 16px rgba(10, 22, 40, 0.06), 0 2px 8px rgba(10, 22, 40, 0.08);
-
-    /* Spacing */
-    --space-sm: 8px;
-    --space-md: 16px;
-    --space-lg: 24px;
-    --space-xl: 32px;
-    --space-2xl: 48px;
-
-    /* Border radius */
+    /* Radius */
+    --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
 
     /* Transitions */
     --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Max content width */
-    --container-xl: 1280px;
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-focus: 0 0 0 3px rgba(74, 158, 255, 0.15);
 }
 
-/* ==================== BASE & RESET ==================== */
+/* Reset */
 *, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', system-ui, sans-serif;
-    background-color: var(--bg-secondary);
+    font-family: var(--font-sans);
+    background: var(--bg-primary);
     color: var(--text-primary);
-    line-height: 1.6;
     min-height: 100vh;
+    line-height: 1.6;
+    padding-top: 70px;
     display: flex;
     flex-direction: column;
 }
 
-main {
-    flex: 1;
-    display: flex; /* Centrer le formulaire verticalement */
-    align-items: flex-start; /* Aligner en haut par défaut */
-    justify-content: center;
-    padding: var(--space-2xl) var(--space-md);
+/* Background gradient */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+            radial-gradient(ellipse 80% 50% at 50% -20%, rgba(74, 158, 255, 0.08) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 40% at 80% 60%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
 }
 
-/* ==================== NAVIGATION ==================== */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ============================================
+   HEADER / NAVBAR
+   ============================================ */
 header {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
-    background: var(--glass-bg);
+    background: rgba(10, 10, 11, 0.85);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid var(--glass-border);
-    box-shadow: var(--shadow-sm);
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .navbar {
-    max-width: var(--container-xl);
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -104,14 +129,22 @@ header {
     padding: 1rem 2rem;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+}
+
 .logo-text {
+    font-family: var(--font-sans);
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--primary);
-    text-decoration: none;
-    letter-spacing: -0.03em;
-    transition: color var(--transition-fast);
-    flex-shrink: 0;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    transition: opacity var(--transition-fast);
+}
+
+.logo-text:hover {
+    opacity: 0.8;
 }
 
 .nav {
@@ -119,16 +152,19 @@ header {
     align-items: center;
     gap: 0.5rem;
     list-style: none;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-full);
+    padding: 0.25rem;
 }
 
 .nav li a {
-    position: relative;
-    text-decoration: none;
+    display: block;
     color: var(--text-secondary);
+    font-size: 0.875rem;
     font-weight: 500;
-    font-size: 0.938rem;
     padding: 0.5rem 1rem;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-full);
     transition: all var(--transition-fast);
     white-space: nowrap;
 }
@@ -136,173 +172,343 @@ header {
 .nav li a:hover,
 .nav li a.active {
     color: var(--text-primary);
-    background-color: var(--accent-subtle);
+    background: var(--glass-hover);
 }
 
-/* ==================== FORM SECTION ==================== */
+.nav li:nth-last-child(1) a,
+.nav li:nth-last-child(2) a {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    font-weight: 600;
+}
+
+.nav li:nth-last-child(1) a:hover,
+.nav li:nth-last-child(2) a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+}
+
+/* ============================================
+   MAIN
+   ============================================ */
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* ============================================
+   FORM SECTION
+   ============================================ */
 .form {
     width: 100%;
-    max-width: 500px; /* Taille maximale du formulaire */
-    background-color: var(--bg-primary);
-    padding: var(--space-xl);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--border);
+    max-width: 520px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Top gradient line */
+.form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent-gradient);
 }
 
 .form h2 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: var(--space-lg);
+    font-size: 1.375rem;
+    font-weight: 600;
     color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 2rem;
     letter-spacing: -0.02em;
 }
 
-/* Style pour le message de succès ThymeLeaf */
-.form p[style*="green"] {
-    color: var(--text-success) !important;
-    background-color: #f0fff4; /* Couleur de fond légère pour le succès */
-    padding: var(--space-md);
+/* Success message */
+.form p[th\:if] {
+    background: var(--accent-green-bg);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: var(--accent-green) !important;
+    padding: 1rem 1.25rem;
     border-radius: var(--radius-md);
-    border: 1px solid var(--success);
-    margin-bottom: var(--space-lg);
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
 
-.form form {
+/* ============================================
+   FORM ELEMENTS
+   ============================================ */
+form {
     display: flex;
     flex-direction: column;
-    gap: var(--space-md); /* Espacement entre les groupes d'éléments */
+    gap: 1.25rem;
 }
 
-.form label {
+label {
+    font-size: 0.8125rem;
     font-weight: 600;
-    font-size: 0.875rem;
-    color: var(--text-primary);
-    margin-top: var(--space-sm);
+    color: var(--text-secondary);
+    margin-bottom: -0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.form input,
-.form select,
-.form textarea {
+input[type="text"],
+input[type="number"],
+select,
+textarea {
     width: 100%;
     padding: 0.875rem 1rem;
-    border: 2px solid var(--border);
-    border-radius: var(--radius-md);
-    font-size: 0.938rem;
-    background-color: var(--bg-primary);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
     color: var(--text-primary);
-    transition: all var(--transition-fast);
-    font-family: inherit;
-}
-
-.form input:focus,
-.form select:focus,
-.form textarea:focus {
-    border-color: var(--accent);
+    background: var(--bg-input);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-md);
     outline: none;
-    box-shadow: 0 0 0 4px var(--accent-subtle);
+    transition: all var(--transition-fast);
 }
 
-.form input:hover,
-.form select:hover,
-.form textarea:hover {
-    border-color: var(--border-hover);
+input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+textarea::placeholder {
+    color: var(--text-tertiary);
 }
 
-.form textarea {
-    resize: vertical;
-    min-height: 100px;
+input[type="text"]:hover,
+input[type="number"]:hover,
+select:hover,
+textarea:hover {
+    border-color: rgba(255, 255, 255, 0.15);
 }
 
-.form select {
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--border-focus);
+    box-shadow: var(--shadow-focus);
+}
+
+/* Number input - hide spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    font-family: var(--font-mono);
+}
+
+/* Select dropdown */
+select {
     appearance: none;
-    /* Flèche customisée */
-    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236B7C93' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 1rem center;
     padding-right: 2.5rem;
     cursor: pointer;
 }
 
-/* Bouton principal (Add Transaction) */
-.form button[type="submit"] {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-    color: var(--text-inverse);
-    padding: 0.875rem 1.5rem;
-    font-size: 1rem;
+select option {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    padding: 0.5rem;
+}
+
+/* Textarea */
+textarea {
+    min-height: 100px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+button[type="submit"] {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
     font-weight: 600;
+    color: var(--bg-primary);
+    background: var(--accent-green);
     border: none;
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: all var(--transition-base);
-    box-shadow: var(--shadow-sm);
-    width: 100%;
-    margin-top: var(--space-lg);
+    margin-top: 0.5rem;
 }
 
-.form button[type="submit"]:hover {
+button[type="submit"]:hover {
+    background: var(--accent-green-light);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
 }
 
-/* Bouton secondaire (Exit) */
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
 .btn-exit {
     display: block;
-    text-align: center;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 600;
     color: var(--text-secondary);
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.75rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
-    transition: all var(--transition-fast);
-    margin-top: var(--space-sm);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-base);
 }
 
 .btn-exit:hover {
     color: var(--text-primary);
-    background-color: var(--accent-subtle);
+    background: var(--glass-hover);
+    border-color: var(--border-medium);
 }
 
-/* ==================== RESPONSIVE DESIGN ==================== */
+/* ============================================
+   RESPONSIVE
+   ============================================ */
 @media (max-width: 768px) {
-    /* Correction Navbar (reste en ligne, défilable) */
+    body {
+        padding-top: 120px;
+    }
+
     .navbar {
+        flex-direction: column;
+        gap: 1rem;
         padding: 1rem;
-        max-width: 100%;
-        gap: var(--space-md);
     }
 
     .nav {
-        flex: 1;
-        flex-shrink: 0;
-        justify-content: flex-end;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 5px;
+        flex-wrap: wrap;
+        justify-content: center;
+        border-radius: var(--radius-lg);
     }
 
     .nav li a {
-        font-size: 0.875rem;
         padding: 0.5rem 0.75rem;
+        font-size: 0.8125rem;
     }
 
-    /* Formulaire sur mobile */
+    main {
+        padding: 1.5rem;
+        align-items: flex-start;
+    }
+
     .form {
-        padding: var(--space-lg);
-        margin: 0; /* Pas de marge si l'écran est petit */
-        max-width: 100%;
+        padding: 1.5rem;
     }
 
     .form h2 {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 140px;
     }
 
-    .form input,
-    .form select,
-    .form textarea,
-    .form button[type="submit"] {
+    .logo-text {
+        font-size: 1.25rem;
+    }
+
+    .nav li a {
+        padding: 0.375rem 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    .form {
+        padding: 1.25rem;
+        border-radius: var(--radius-lg);
+    }
+
+    .form h2 {
+        font-size: 1.125rem;
+        margin-bottom: 1.5rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
         padding: 0.75rem;
-        font-size: 0.9rem;
+        font-size: 1rem; /* Prevent zoom on iOS */
+    }
+
+    button[type="submit"],
+    .btn-exit {
+        padding: 0.875rem 1.25rem;
+    }
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border-medium);
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+::selection {
+    background: rgba(74, 158, 255, 0.3);
+    color: var(--text-primary);
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+*:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }

@@ -51,7 +51,7 @@ public class AuthController {
             nameCookie.setPath("/");
             response.addCookie(nameCookie);
 
-            return "dashboard";
+            return "redirect:/dashboard";
         }
 
         return "login";
