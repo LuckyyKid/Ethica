@@ -16,7 +16,8 @@ public class Trade {
     private double priceAtExecution;
     @Column(nullable = false, length = 50)
     private double quantity;
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
+    @Lob
     private String decisionReason;
 
 

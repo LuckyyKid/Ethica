@@ -16,4 +16,29 @@ public class UserController {
         return "index";
     }
 
+    @GetMapping("/about")
+    public String aboutPage() {
+        return "about";
+    }
+    @GetMapping("/news")
+    public String newsPage() {
+        return "news";
+    }
+
+    // Tu peux ajouter d'autres pages statiques ici
+    @GetMapping("/privacy")
+    public String privacyPage() {
+        return "privacy";
+    }
+
+    @GetMapping("/terms")
+    public String termsPage() {
+        return "terms";
+    }
+
+    @GetMapping("/contact")
+    public String contactPage() {
+        return "contact";
+    }
+
 }

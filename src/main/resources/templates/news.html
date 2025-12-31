@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Market Updates | Ethica</title>
+    <link rel="stylesheet" th:href="@{/css/news.css}">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a th:href="@{/}" class="logo-text">Ethica</a>
+        </div>
+        <ul class="nav">
+            <li><a th:href="@{/index}">Home</a></li>
+            <li><a th:href="@{/about}">About Us</a></li>
+            <li><a th:href="@{/founder}">Price</a></li>
+            <li><a th:href="@{/news}" class="active">News</a></li>
+            <li><a th:href="@{/signUp}">Sign Up</a></li>
+            <li><a th:href="@{/login}">Sign In</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">Live Updates</span>
+            <h1>Market <span class="highlight">News</span></h1>
+            <p>Stay informed with real-time market coverage and curated financial news.</p>
+        </div>
+    </section>
+
+    <!-- Live TV Section -->
+    <section class="live-tv-section">
+        <div class="live-tv-container">
+            <div class="live-badge">
+                <span class="live-dot"></span>
+                LIVE
+            </div>
+            <h2>Bloomberg Television</h2>
+            <div class="video-wrapper">
+                <iframe
+                        src="https://www.youtube.com/embed/iEpJwprxDdk?autoplay=1&mute=1"
+                        title="Bloomberg TV Live"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Articles Section -->
+    <section class="news-section">
+        <div class="news-header">
+            <h2>Latest Financial News</h2>
+            <p>Curated articles updated in real-time from trusted sources</p>
+
+            <!-- Category Filter -->
+            <div class="category-filter">
+                <a th:href="@{/news(category='all')}"
+                   th:classappend="${currentCategory == 'all'} ? 'active' : ''"
+                   class="filter-btn">All</a>
+                <a th:href="@{/news(category='business')}"
+                   th:classappend="${currentCategory == 'business'} ? 'active' : ''"
+                   class="filter-btn">Business</a>
+                <a th:href="@{/news(category='technology')}"
+                   th:classappend="${currentCategory == 'technology'} ? 'active' : ''"
+                   class="filter-btn">Technology</a>
+                <a th:href="@{/news(category='finance')}"
+                   th:classappend="${currentCategory == 'finance'} ? 'active' : ''"
+                   class="filter-btn">Finance</a>
+                <a th:href="@{/news(category='general')}"
+                   th:classappend="${currentCategory == 'general'} ? 'active' : ''"
+                   class="filter-btn">General</a>
+            </div>
+        </div>
+
+        <!-- News Grid -->
+        <div class="news-grid" th:if="${not #lists.isEmpty(articles)}">
+            <article class="news-card" th:each="article : ${articles}">
+                <div class="card-image">
+                    <img th:if="${article.imageUrl != null and !article.imageUrl.isEmpty()}"
+                         th:src="${article.imageUrl}"
+                         th:alt="${article.title}"
+                         onerror="this.style.display='none'">
+                    <div class="card-image-placeholder" th:if="${article.imageUrl == null or article.imageUrl.isEmpty()}">
+                        <span>📰</span>
+                    </div>
+                    <span class="card-category" th:text="${article.category}">General</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="card-source" th:text="${article.source}">Source</span>
+                        <span class="card-date" th:text="${#strings.substring(article.publishedAt, 0, 10)}">Date</span>
+                    </div>
+                    <h3 class="card-title" th:text="${#strings.length(article.title) > 80 ? #strings.substring(article.title, 0, 80) + '...' : article.title}">Title</h3>
+                    <p class="card-description" th:text="${#strings.length(article.description) > 120 ? #strings.substring(article.description, 0, 120) + '...' : article.description}">Description</p>
+                    <a th:href="${article.url}" target="_blank" rel="noopener noreferrer" class="card-link">
+                        Read More <span class="arrow">→</span>
+                    </a>
+                </div>
+            </article>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" th:if="${#lists.isEmpty(articles)}">
+            <p>No news articles available at the moment.</p>
+            <a th:href="@{/news}" class="retry-btn">Refresh</a>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-left">
+            <h4>Ethica</h4>
+            <p>Invest in what you understand.<br>Grow wealth that reflects your values.</p>
+            <p class="copyright">&copy; 2025 Ethica Inc. All rights reserved.</p>
+        </div>
+
+        <div class="footer-links">
+            <h5>Company</h5>
+            <ul>
+                <li><a th:href="@{/about}">About Us</a></li>
+                <li><a th:href="@{/founder}">Pricing</a></li>
+                <li><a th:href="@{/news}">News</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-links">
+            <h5>Legal</h5>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-social">
+            <h5>Follow Us</h5>
+            <div class="social-links">
+                <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+                <a href="https://twitter.com" target="_blank">Twitter</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -512,3 +512,134 @@ button[type="submit"]:active {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* ============================================
+   LOADING OVERLAY
+   ============================================ */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 10, 11, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.overlay-content {
+    text-align: center;
+    padding: 3rem;
+}
+
+.state-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.state-container h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.state-container p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* ============================================
+   SPINNER ANIMATION
+   ============================================ */
+.spinner {
+    width: 64px;
+    height: 64px;
+    border: 3px solid var(--glass-border);
+    border-top-color: var(--accent-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================
+   SUCCESS CHECKMARK ANIMATION
+   ============================================ */
+.checkmark-circle {
+    width: 80px;
+    height: 80px;
+}
+
+.checkmark {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: var(--accent-green);
+    stroke-miterlimit: 10;
+    animation: checkmark-scale 0.3s ease-in-out 0.3s both;
+}
+
+.checkmark-circle-bg {
+    stroke: var(--accent-green);
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    fill: none;
+    animation: checkmark-stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark-check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    stroke-width: 3;
+    stroke-linecap: round;
+    animation: checkmark-stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+}
+
+@keyframes checkmark-stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes checkmark-scale {
+    0%, 100% {
+        transform: none;
+    }
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
+}
+
+/* Success state glow effect */
+#successState .checkmark-circle {
+    filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.4));
+}
+
+#successState h3 {
+    color: var(--accent-green);
+}

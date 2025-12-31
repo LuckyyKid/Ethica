@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My portfolio - Ethica</title>
     <link rel="stylesheet" th:href="@{/css/clientPortfolio.css}">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
 <header>
@@ -19,7 +18,7 @@
             <li><a th:href="@{/founder}">Price</a></li>
             <li><a th:href="@{/news}">News</a></li>
             <li><a th:href="@{/signUp}">Sign Up</a></li>
-            <li><a th:href="@{/login}">Deconnexion</a></li>
+            <li><a th:href="@{/login}">Log out</a></li>
         </ul>
     </nav>
 </header>
@@ -28,169 +27,55 @@
     <!-- Graph -->
     <div class="left-panel">
         <h2>Evolution of your balance</h2>
-        <div style="position: relative; height: 400px; width: 100%;">
-            <canvas id="balanceChart"></canvas>
+        <div class="chart-container">
+            <canvas id="myChart"></canvas>
         </div>
     </div>
 
     <!-- trades history -->
     <div class="right-panel">
         <h2>Most recent Transactions</h2>
-        <table class="trade-table">
-            <thead>
-            <tr>
-                <th>Type</th>
-                <th>Symbole</th>
-                <th>Quantity</th>
-                <th>Value ($)</th>
-                <th>Date</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="trade : ${trades}">
-                <td th:text="${trade.buy} ? 'Buy' : 'Sell'"></td>
-                <td th:text="${trade.symbol}"></td>
-                <td th:text="${trade.quantity}"></td>
-                <td th:text="${#numbers.formatDecimal(trade.quantity * trade.priceAtExecution, 1, 'POINT', 2, 'NONE')}"></td>
-                <td th:text="${#temporals.format(trade.timestamp, 'dd/MM/yyyy HH:mm')}"></td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="table-wrapper">
+            <table class="trade-table">
+                <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Symbol</th>
+                    <th>Quantity</th>
+                    <th>Value ($)</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody id="transactionsBody">
+                <tr th:each="trade, iterStat : ${trades}" th:classappend="${iterStat.index ge 5} ? 'hidden-row hidden' : ''">
+                    <td th:text="${trade.buy} ? 'Buy' : 'Sell'" th:class="${trade.buy} ? 'type-buy' : 'type-sell'"></td>
+                    <td th:text="${trade.symbol}" class="symbol"></td>
+                    <td th:text="${trade.quantity}"></td>
+                    <td class="value" th:text="${'$' + #numbers.formatDecimal(trade.quantity * trade.priceAtExecution, 1, 2)}"></td>
+                    <td th:text="${#temporals.format(trade.timestamp, 'dd/MM/yyyy HH:mm')}" class="date"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <button id="showAllBtn" class="btn-show-all" th:if="${#lists.size(trades) gt 5}">
+            <span id="btnText">Show all transactions</span>
+            <span id="btnCount" th:text="'(' + ${#lists.size(trades)} + ')'"></span>
+        </button>
 
         <div class="buttons">
-            <a th:href="@{/trading}" class="btn">Buy</a>
-            <a th:href="@{/trading}" class="btn">Sell</a>
-            <a th:href="@{/dashboard}" class="btn">Exit</a>
+            <a th:href="@{/trading}" class="btn btn-buy">Buy</a>
+            <a th:href="@{/trading}" class="btn btn-sell">Sell</a>
+            <a th:href="@{/dashboard}" class="btn btn-exit">Exit</a>
         </div>
     </div>
 </main>
 
-<!-- SCRIPT CHART.JS -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const ctx = document.getElementById('balanceChart').getContext('2d');
+<script th:src="@{/js/chart.min.js}" defer></script>
 
-        // Create gradient fill
-        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, 'rgba(16, 185, 129, 0.25)');
-        gradient.addColorStop(0.5, 'rgba(16, 185, 129, 0.08)');
-        gradient.addColorStop(1, 'rgba(16, 185, 129, 0)');
 
-        // Sample data - replace with your actual data from backend
-        const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        const data = [100000, 102500, 98000, 105000, 112000, 108500, 115000, 118000, 122000, 119500, 125000, 128500];
-
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Portfolio Value',
-                    data: data,
-                    fill: true,
-                    backgroundColor: gradient,
-                    borderColor: '#10b981',
-                    borderWidth: 2.5,
-                    pointBackgroundColor: '#10b981',
-                    pointBorderColor: '#0a0a0b',
-                    pointBorderWidth: 2,
-                    pointRadius: 0,
-                    pointHoverRadius: 6,
-                    pointHoverBackgroundColor: '#10b981',
-                    pointHoverBorderColor: '#ffffff',
-                    pointHoverBorderWidth: 2,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: {
-                    mode: 'index',
-                    intersect: false,
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        enabled: true,
-                        backgroundColor: 'rgba(17, 17, 19, 0.95)',
-                        titleColor: '#fafafa',
-                        bodyColor: '#a1a1aa',
-                        borderColor: 'rgba(255, 255, 255, 0.1)',
-                        borderWidth: 1,
-                        cornerRadius: 12,
-                        padding: 16,
-                        displayColors: false,
-                        titleFont: {
-                            family: "'DM Sans', sans-serif",
-                            size: 14,
-                            weight: '600'
-                        },
-                        bodyFont: {
-                            family: "'DM Sans', sans-serif",
-                            size: 24,
-                            weight: '700'
-                        },
-                        callbacks: {
-                            title: function(context) {
-                                return context[0].label + ' 2025';
-                            },
-                            label: function(context) {
-                                let value = context.parsed.y;
-                                return '$' + value.toLocaleString('en-US', {
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 2
-                                });
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        ticks: {
-                            color: 'rgba(255, 255, 255, 0.4)',
-                            font: {
-                                family: "'DM Sans', sans-serif",
-                                size: 12
-                            },
-                            padding: 10
-                        },
-                        border: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        position: 'right',
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.05)',
-                            drawBorder: false
-                        },
-                        ticks: {
-                            color: 'rgba(255, 255, 255, 0.4)',
-                            font: {
-                                family: "'DM Sans', sans-serif",
-                                size: 12
-                            },
-                            padding: 16,
-                            callback: function(value) {
-                                return '$' + (value / 1000) + 'k';
-                            }
-                        },
-                        border: {
-                            display: false
-                        }
-                    }
-                }
-            }
-        });
-    });
-</script>
+<script th:src="@{/js/transactions.js}" defer></script>
+<script th:src="@{/js/portfolioChart.js}" defer></script>
 
 </body>
 </html>

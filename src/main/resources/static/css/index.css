@@ -241,13 +241,14 @@ header {
     50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
 }
 
+/* BANNER IMAGE - REDUCED SIZE */
 .hero img {
-    max-width: 500px;
+    max-width: 280px;
     width: 100%;
     height: auto;
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-lg), var(--shadow-glow);
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     animation: fadeInUp 0.8s ease-out;
     border: 1px solid var(--glass-border);
 }
@@ -586,7 +587,7 @@ header {
     }
 
     .hero img {
-        max-width: 350px;
+        max-width: 220px;
     }
 
     .theme-section {
@@ -634,8 +635,8 @@ header {
     }
 
     .hero img {
-        max-width: 280px;
-        margin-bottom: 2rem;
+        max-width: 180px;
+        margin-bottom: 1.5rem;
     }
 
     .hero button {

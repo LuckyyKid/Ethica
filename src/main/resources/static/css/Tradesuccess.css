@@ -1,0 +1,177 @@
+/* ============================================
+   ETHICA - Trade Success Page (Checkmark)
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg-primary: #0a0a0b;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --accent-green: #10b981;
+    --accent-green-light: #34d399;
+    --text-primary: #fafafa;
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --text-tertiary: rgba(255, 255, 255, 0.4);
+    --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--bg-primary);
+    font-family: var(--font-sans);
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+            radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 40% at 80% 60%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.success-card {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    padding: 3rem 2.5rem;
+    border-radius: 24px;
+    text-align: center;
+    max-width: 420px;
+    width: 90%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Top green gradient line */
+.success-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-green), var(--accent-green-light));
+}
+
+/* ============================================
+   CHECKMARK ANIMATION
+   ============================================ */
+.checkmark-container {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 2rem;
+}
+
+.checkmark {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: var(--accent-green);
+    stroke-miterlimit: 10;
+    filter: drop-shadow(0 0 30px rgba(16, 185, 129, 0.5));
+    animation: scale-in 0.4s ease-out;
+}
+
+.checkmark-circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: var(--accent-green);
+    fill: none;
+    animation: stroke-anim 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark-check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    stroke-width: 3;
+    stroke-linecap: round;
+    animation: stroke-anim 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
+}
+
+@keyframes stroke-anim {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes scale-in {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.15);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   TEXT
+   ============================================ */
+h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--accent-green);
+    letter-spacing: -0.02em;
+}
+
+p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.redirect-text {
+    font-size: 0.8125rem;
+    color: var(--text-tertiary);
+    display: block;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 480px) {
+    .success-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .checkmark-container {
+        width: 72px;
+        height: 72px;
+    }
+
+    .checkmark {
+        width: 72px;
+        height: 72px;
+    }
+
+    h2 { font-size: 1.25rem; }
+    p { font-size: 0.9375rem; }
+}

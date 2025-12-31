@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trading | Ethica</title>
     <link rel="stylesheet" th:href="@{/css/trading.css}" />
 </head>
@@ -26,8 +27,6 @@
     <section class="form">
         <h2>Add a transaction (Buy or Sell)</h2>
 
-        <p th:if="${success}" th:text="${success}" style="text-align:center; color: green; font-weight: bold;"></p>
-
         <form th:action="@{/trading}" method="post">
 
             <label for="symbol">Symbol</label>
@@ -48,14 +47,12 @@
             <label for="decisionReason">Reason</label>
             <textarea id="decisionReason" name="decisionReason" placeholder="Explain your decision..."></textarea>
 
-            <!--  submit bouton -->
             <button type="submit">Add Transaction</button>
 
-            <!-- Exit bouton -->
             <a th:href="@{/dashboard}" class="btn-exit">Exit</a>
         </form>
-
     </section>
 </main>
+
 </body>
 </html>

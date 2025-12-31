@@ -62,6 +62,19 @@ public class TradingController {
 
         tradeService.handleTradeSubmission(trade);
 
-        return "redirect:/clientPortfolio";
+        // Rediriger vers la page de traitement
+        return "redirect:/tradeProcessing";
+    }
+
+    // Page de traitement (spinner)
+    @GetMapping("/tradeProcessing")
+    public String processingPage() {
+        return "tradeProcessing";
+    }
+
+    // Page de succès (checkmark)
+    @GetMapping("/tradeSuccess")
+    public String successPage() {
+        return "tradeSuccess";
     }
 }

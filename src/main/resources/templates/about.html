@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Ethica</title>
+    <link rel="stylesheet" th:href="@{/css/about.css}">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a th:href="@{/}" class="logo-text">Ethica</a>
+        </div>
+        <ul class="nav">
+            <li><a th:href="@{/index}">Home</a></li>
+            <li><a th:href="@{/about}" class="active">About Us</a></li>
+            <li><a th:href="@{/founder}">Price</a></li>
+            <li><a th:href="@{/news}">News</a></li>
+            <li><a th:href="@{/signUp}">Sign Up</a></li>
+            <li><a th:href="@{/login}">Sign In</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">Our Mission</span>
+            <h1>Invest in What You <span class="highlight">Understand</span></h1>
+            <p class="hero-subtitle">Empowering everyone to build wealth through investments that align with their values, knowledge, and beliefs.</p>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section">
+        <div class="quote-card">
+            <div class="quote-icon">"</div>
+            <blockquote>
+                Never invest in a business you cannot understand.
+            </blockquote>
+            <cite>— Warren Buffett</cite>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="story-container">
+            <div class="story-header">
+                <span class="section-tag">Our Story</span>
+                <h2>Why We Built Ethica</h2>
+            </div>
+
+            <div class="story-content">
+                <div class="story-block">
+                    <div class="story-number">01</div>
+                    <div class="story-text">
+                        <h3>The Problem We Saw</h3>
+                        <p>Most young investors feel lost when it comes to investing. Overwhelmed by thousands of stock options, complex financial jargon, and the fear of making mistakes, many either avoid investing altogether or fall victim to scams promising quick returns.</p>
+                    </div>
+                </div>
+
+                <div class="story-block">
+                    <div class="story-number">02</div>
+                    <div class="story-text">
+                        <h3>The Buffett Principle</h3>
+                        <p>Warren Buffett's timeless wisdom inspired us: invest only in what you understand. He calls it staying within your "circle of competence." The size of this circle doesn't matter what matters is knowing its boundaries. This simple principle has guided the most successful investors for decades.</p>
+                    </div>
+                </div>
+
+                <div class="story-block">
+                    <div class="story-number">03</div>
+                    <div class="story-text">
+                        <h3>Values Meet Returns</h3>
+                        <p>We noticed a growing demand: people want to invest in causes they care about. Whether it's sustainability, technology, healthcare, or social impact investors want their money to reflect their values. We asked: why not build wealth AND support what matters to you?</p>
+                    </div>
+                </div>
+
+                <div class="story-block">
+                    <div class="story-number">04</div>
+                    <div class="story-text">
+                        <h3>The Ethica Solution</h3>
+                        <p>Ethica helps you discover investments that match your interests, values, and understanding. By giving you a reason beyond just financial returns, we help you stay committed, avoid scams, and build a portfolio you truly believe in. No more overthinking which stocks to choose invest in what resonates with you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy-section">
+        <div class="philosophy-container">
+            <div class="philosophy-header">
+                <span class="section-tag">Our Philosophy</span>
+                <h2>The Circle of Competence</h2>
+                <p>Understanding a business reduces the risk of costly mistakes. That's why we help you invest in industries and companies you already know.</p>
+            </div>
+
+            <div class="philosophy-cards">
+                <div class="philosophy-card">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 16v-4"></path>
+                            <path d="M12 8h.01"></path>
+                        </svg>
+                    </div>
+                    <h3>Understand First</h3>
+                    <p>We match you with companies in sectors you already understand—technology, healthcare, fashion, gaming, sustainability, and more.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </div>
+                    <h3>Align with Values</h3>
+                    <p>Your investments should reflect who you are. Support companies that share your values and contribute to causes you believe in.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <h3>Grow Wealth</h3>
+                    <p>Ethical investing doesn't mean sacrificing returns. We help you find companies that are both aligned with your values AND financially strong.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <h3>Stay Protected</h3>
+                    <p>By investing in what you understand, you're less likely to fall for scams or make emotional decisions based on hype.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-item">
+                <span class="stat-number">73%</span>
+                <span class="stat-label">of young investors feel overwhelmed by investment choices</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">85%</span>
+                <span class="stat-label">want their investments to align with personal values</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">2.5x</span>
+                <span class="stat-label">more likely to hold investments they understand</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2>Ready to Invest in What Matters to You?</h2>
+            <p>Join Ethica and discover investments that align with your knowledge, values, and financial goals.</p>
+            <div class="cta-buttons">
+                <a th:href="@{/signUp}" class="btn-primary">Get Started Free</a>
+                <a th:href="@{/founder}" class="btn-secondary">View Pricing</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-left">
+            <h4>Ethica</h4>
+            <p>Invest in what you understand.<br>Grow wealth that reflects your values.</p>
+            <p class="copyright">&copy; 2025 Ethica Inc. All rights reserved.</p>
+        </div>
+
+        <div class="footer-links">
+            <h5>Company</h5>
+            <ul>
+                <li><a th:href="@{/about}">About Us</a></li>
+                <li><a th:href="@{/founder}">Pricing</a></li>
+                <li><a th:href="@{/news}">News</a></li>
+                <li><a href="#">Careers</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-links">
+            <h5>Legal</h5>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-social">
+            <h5>Follow Us</h5>
+            <div class="social-links">
+                <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+                <a href="https://twitter.com" target="_blank">Twitter</a>
+                <a href="https://instagram.com" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

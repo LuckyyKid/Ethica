@@ -31,7 +31,8 @@
 
     </form>
 </div>
-<div id="popupError" style="display: none; color: red;">Invalid password or unknown user</div>
+<div id="popupError" th:if="${error}" th:text="${error}">Invalid password or unknown user</div>
+
 
 <script>
 
