@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock News Search | Ethica</title>
+    <link rel="stylesheet" th:href="@{/css/stockNews.css}">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a th:href="@{/}" class="logo-text">Ethica</a>
+        </div>
+        <ul class="nav">
+            <li><a th:href="@{/dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/clientPortfolio}">Portfolio</a></li>
+            <li><a th:href="@{/news}">News</a></li>
+            <li><a th:href="@{/stock-news}" class="active">Stock Search</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">Premium Feature</span>
+            <h1>Stock <span class="highlight">News Search</span></h1>
+            <p>Search for news about any stock ticker with advanced filters</p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="search-container">
+            <form th:action="@{/stock-news}" method="get" class="search-form">
+                <!-- Main Search -->
+                <div class="search-main">
+                    <div class="input-group ticker-input">
+                        <label for="ticker">Stock Ticker</label>
+                        <input type="text" id="ticker" name="ticker"
+                               th:value="${currentTicker}"
+                               placeholder="e.g. AAPL, TSLA, MSFT"
+                               required>
+                    </div>
+                    <button type="submit" class="search-btn">
+                        <span>Search News</span>
+                        <span class="arrow">→</span>
+                    </button>
+                </div>
+
+                <!-- Advanced Filters -->
+                <details class="advanced-filters">
+                    <summary>Advanced Filters</summary>
+                    <div class="filters-grid">
+                        <!-- Sentiment -->
+                        <div class="input-group">
+                            <label for="sentiment">Sentiment</label>
+                            <select id="sentiment" name="sentiment">
+                                <option value="">All</option>
+                                <option value="positive" th:selected="${currentSentiment == 'positive'}">Positive</option>
+                                <option value="neutral" th:selected="${currentSentiment == 'neutral'}">Neutral</option>
+                                <option value="negative" th:selected="${currentSentiment == 'negative'}">Negative</option>
+                            </select>
+                        </div>
+
+                        <!-- Type -->
+                        <div class="input-group">
+                            <label for="type">Content Type</label>
+                            <select id="type" name="type">
+                                <option value="">All</option>
+                                <option value="article" th:selected="${currentType == 'article'}">Articles</option>
+                                <option value="video" th:selected="${currentType == 'video'}">Videos</option>
+                            </select>
+                        </div>
+
+                        <!-- Date Range -->
+                        <div class="input-group">
+                            <label for="date">Date Range</label>
+                            <select id="date" name="date">
+                                <option value="">All Time</option>
+                                <option value="today" th:selected="${currentDate == 'today'}">Today</option>
+                                <option value="yesterday" th:selected="${currentDate == 'yesterday'}">Yesterday</option>
+                                <option value="last7days" th:selected="${currentDate == 'last7days'}">Last 7 Days</option>
+                                <option value="last30days" th:selected="${currentDate == 'last30days'}">Last 30 Days</option>
+                                <option value="last90days" th:selected="${currentDate == 'last90days'}">Last 90 Days</option>
+                            </select>
+                        </div>
+
+                        <!-- Topic -->
+                        <div class="input-group">
+                            <label for="topic">Topic</label>
+                            <select id="topic" name="topic">
+                                <option value="">All Topics</option>
+                                <option value="earnings" th:selected="${currentTopic == 'earnings'}">Earnings</option>
+                                <option value="dividend" th:selected="${currentTopic == 'dividend'}">Dividend</option>
+                                <option value="manda" th:selected="${currentTopic == 'manda'}">Mergers & Acquisitions</option>
+                                <option value="CEO" th:selected="${currentTopic == 'CEO'}">CEO News</option>
+                                <option value="product" th:selected="${currentTopic == 'product'}">Product News</option>
+                                <option value="Layoffs" th:selected="${currentTopic == 'Layoffs'}">Layoffs</option>
+                                <option value="tanalysis" th:selected="${currentTopic == 'tanalysis'}">Technical Analysis</option>
+                            </select>
+                        </div>
+
+                        <!-- Source -->
+                        <div class="input-group">
+                            <label for="source">Source</label>
+                            <select id="source" name="source">
+                                <option value="">All Sources</option>
+                                <option value="CNBC" th:selected="${currentSource == 'CNBC'}">CNBC</option>
+                                <option value="Bloomberg" th:selected="${currentSource == 'Bloomberg'}">Bloomberg</option>
+                                <option value="Reuters" th:selected="${currentSource == 'Reuters'}">Reuters</option>
+                                <option value="WSJ" th:selected="${currentSource == 'WSJ'}">Wall Street Journal</option>
+                                <option value="Benzinga" th:selected="${currentSource == 'Benzinga'}">Benzinga</option>
+                                <option value="Seeking+Alpha" th:selected="${currentSource == 'Seeking+Alpha'}">Seeking Alpha</option>
+                                <option value="Yahoo+Finance" th:selected="${currentSource == 'Yahoo+Finance'}">Yahoo Finance</option>
+                                <option value="The+Motley+Fool" th:selected="${currentSource == 'The+Motley+Fool'}">Motley Fool</option>
+                            </select>
+                        </div>
+
+                        <!-- Items per page -->
+                        <div class="input-group">
+                            <label for="items">Results</label>
+                            <select id="items" name="items">
+                                <option value="10" th:selected="${currentItems == 10}">10</option>
+                                <option value="20" th:selected="${currentItems == 20}">20</option>
+                                <option value="30" th:selected="${currentItems == 30}">30</option>
+                                <option value="50" th:selected="${currentItems == 50}">50</option>
+                            </select>
+                        </div>
+                    </div>
+                </details>
+            </form>
+        </div>
+    </section>
+
+    <!-- Top Mentioned Section -->
+    <section class="top-mentioned-section" th:if="${topMentioned != null and topMentioned.stocks != null and !topMentioned.stocks.isEmpty()}">
+        <div class="top-mentioned-container">
+            <h3>Trending Stocks (Last 7 Days)</h3>
+            <div class="trending-tags">
+                <a th:each="stock : ${topMentioned.stocks}"
+                   th:href="@{/stock-news(ticker=${stock.ticker})}"
+                   class="trending-tag">
+                    <span class="tag-ticker" th:text="${stock.ticker}">AAPL</span>
+                    <span class="tag-mentions" th:text="${stock.mentions + ' mentions'}">100 mentions</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results-section" th:if="${currentTicker != null and !currentTicker.isEmpty()}">
+        <div class="results-container">
+            <div class="results-header">
+                <h2>
+                    News for <span class="ticker-badge" th:text="${currentTicker}">AAPL</span>
+                </h2>
+                <span class="results-count" th:text="${#lists.size(articles)} + ' articles found'">0 articles found</span>
+            </div>
+
+            <!-- News Grid -->
+            <div class="news-grid" th:if="${not #lists.isEmpty(articles)}">
+                <article class="news-card" th:each="article : ${articles}">
+                    <div class="card-image" th:if="${article.imageUrl != null and !article.imageUrl.isEmpty()}">
+                        <img th:src="${article.imageUrl}" th:alt="${article.title}" onerror="this.parentElement.style.display='none'">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span class="card-source" th:text="${article.source}">Source</span>
+                            <span class="card-sentiment"
+                                  th:classappend="${article.sentiment == 'Positive'} ? 'positive' : (${article.sentiment == 'Negative'} ? 'negative' : 'neutral')"
+                                  th:text="${article.sentiment}">Neutral</span>
+                        </div>
+                        <h3 class="card-title" th:text="${article.title}">Title</h3>
+                        <p class="card-text" th:if="${article.text != null and !article.text.isEmpty()}"
+                           th:text="${#strings.length(article.text) > 150 ? #strings.substring(article.text, 0, 150) + '...' : article.text}">Description</p>
+                        <div class="card-footer">
+                            <div class="card-tickers">
+                                <span th:each="t : ${#strings.arraySplit(article.tickers, ',')}" class="mini-ticker" th:text="${t}">AAPL</span>
+                            </div>
+                            <span class="card-date" th:text="${article.date}">Date</span>
+                        </div>
+                        <a th:href="${article.url}" target="_blank" rel="noopener noreferrer" class="card-link">
+                            Read Full Article <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" th:if="${#lists.isEmpty(articles)}">
+                <div class="empty-icon"></div>
+                <p>No news found for <strong th:text="${currentTicker}">TICKER</strong></p>
+                <p class="empty-hint">Try adjusting your filters or search for a different ticker</p>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" th:if="${not #lists.isEmpty(articles)}">
+                <a th:if="${currentPage > 1}"
+                   th:href="@{/stock-news(ticker=${currentTicker}, page=${currentPage - 1}, sentiment=${currentSentiment}, type=${currentType}, date=${currentDate}, items=${currentItems})}"
+                   class="page-btn">← Previous</a>
+                <span class="page-info">Page <span th:text="${currentPage}">1</span></span>
+                <a th:href="@{/stock-news(ticker=${currentTicker}, page=${currentPage + 1}, sentiment=${currentSentiment}, type=${currentType}, date=${currentDate}, items=${currentItems})}"
+                   class="page-btn">Next →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Initial State (no search yet) -->
+    <section class="initial-state" th:if="${currentTicker == null or currentTicker.isEmpty()}">
+        <div class="initial-container">
+            <div class="initial-icon"></div>
+            <h3>Search for Stock News</h3>
+            <p>Enter a stock ticker above to find the latest news, analysis, and updates</p>
+            <div class="popular-searches">
+                <span>Popular:</span>
+                <a th:href="@{/stock-news(ticker='AAPL')}">AAPL</a>
+                <a th:href="@{/stock-news(ticker='TSLA')}">TSLA</a>
+                <a th:href="@{/stock-news(ticker='MSFT')}">MSFT</a>
+                <a th:href="@{/stock-news(ticker='NVDA')}">NVDA</a>
+                <a th:href="@{/stock-news(ticker='AMZN')}">AMZN</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-left">
+            <h4>Ethica</h4>
+            <p>Invest in what you understand.</p>
+            <p class="copyright">&copy; 2025 Ethica Inc.</p>
+        </div>
+        <div class="footer-links">
+            <a th:href="@{/about}">About</a>
+            <a th:href="@{/news}">News</a>
+            <a th:href="@{/dashboard}">Dashboard</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

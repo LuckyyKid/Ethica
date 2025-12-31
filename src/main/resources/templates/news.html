@@ -13,12 +13,20 @@
             <a th:href="@{/}" class="logo-text">Ethica</a>
         </div>
         <ul class="nav">
-            <li><a th:href="@{/index}">Home</a></li>
+            <!-- Si connecté, afficher Dashboard, sinon Home -->
+            <li th:if="${session.userConnecte != null}"><a th:href="@{/dashboard}">Dashboard</a></li>
+            <li th:if="${session.userConnecte == null}"><a th:href="@{/index}">Home</a></li>
+
             <li><a th:href="@{/about}">About Us</a></li>
-            <li><a th:href="@{/founder}">Price</a></li>
             <li><a th:href="@{/news}" class="active">News</a></li>
-            <li><a th:href="@{/signUp}">Sign Up</a></li>
-            <li><a th:href="@{/login}">Sign In</a></li>
+
+            <!-- Si connecté, afficher Portfolio, sinon Sign Up -->
+            <li th:if="${session.userConnecte != null}"><a th:href="@{/clientPortfolio}">Portfolio</a></li>
+            <li th:if="${session.userConnecte == null}"><a th:href="@{/signUp}">Sign Up</a></li>
+
+            <!-- Si connecté, afficher Log out, sinon Sign In -->
+            <li th:if="${session.userConnecte != null}"><a th:href="@{/logout}">Log out</a></li>
+            <li th:if="${session.userConnecte == null}"><a th:href="@{/login}">Sign In</a></li>
         </ul>
     </nav>
 </header>
@@ -30,6 +38,14 @@
             <span class="hero-tag">Live Updates</span>
             <h1>Market <span class="highlight">News</span></h1>
             <p>Stay informed with real-time market coverage and curated financial news.</p>
+
+            <!-- Button visible only for logged-in users -->
+            <a th:if="${session.userConnecte != null}"
+               th:href="@{/stock-news}"
+               class="premium-btn">
+                <span class="premium-icon"></span>
+                Search by Ticker
+            </a>
         </div>
     </section>
 
@@ -40,13 +56,16 @@
                 <span class="live-dot"></span>
                 LIVE
             </div>
-            <h2>Bloomberg Television</h2>
+            <h2>Yahoo Finance Live</h2>
             <div class="video-wrapper">
                 <iframe
-                        src="https://www.youtube.com/embed/iEpJwprxDdk?autoplay=1&mute=1"
-                        title="Bloomberg TV Live"
+                        width="560"
+                        height="315"
+                        src="https://www.youtube.com/embed/KQp-e_XQnDE?si=sB07z-ZAg3bfjcMG&autoplay=1&mute=1"
+                        title="Yahoo Finance Live"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
                         allowfullscreen>
                 </iframe>
             </div>

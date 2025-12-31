@@ -19,9 +19,18 @@ public class SecurityHeadersFilter implements Filter {
 
         HttpServletResponse res = (HttpServletResponse) response;
 
-        // Ajout des headers de sécurité détectés manquants par ZAP
-        res.setHeader("Content-Security-Policy", "default-src 'self'");
-        res.setHeader("X-Frame-Options", "DENY");
+        // Content Security Policy - autorised  external ressources
+        String csp = "default-src 'self'; " +
+                "script-src 'self' https://cdn.jsdelivr.net https://www.youtube.com https://s.ytimg.com; " +
+                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+                "font-src 'self' https://fonts.gstatic.com; " +
+                "img-src 'self' data: https: http:; " +
+                "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; " +
+                "connect-src 'self' https://api.marketaux.com;";
+
+        res.setHeader("Content-Security-Policy", csp);
+        // Changed de DENY to allow  YouTube live content
+        res.setHeader("X-Frame-Options", "SAMEORIGIN");
         res.setHeader("X-Content-Type-Options", "nosniff");
 
         chain.doFilter(request, response);

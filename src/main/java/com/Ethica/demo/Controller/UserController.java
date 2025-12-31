@@ -20,10 +20,6 @@ public class UserController {
     public String aboutPage() {
         return "about";
     }
-    @GetMapping("/news")
-    public String newsPage() {
-        return "news";
-    }
 
     // Tu peux ajouter d'autres pages statiques ici
     @GetMapping("/privacy")

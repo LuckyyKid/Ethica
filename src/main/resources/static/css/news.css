@@ -186,6 +186,31 @@ header {
     line-height: 1.7;
 }
 
+/* Premium Button for logged-in users */
+.premium-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding: 1rem 1.75rem;
+    background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
+    border-radius: var(--radius-full);
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+}
+
+.premium-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.4);
+}
+
+.premium-icon {
+    font-size: 1.125rem;
+}
+
 /* ============================================
    LIVE TV SECTION
    ============================================ */
