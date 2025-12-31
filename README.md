@@ -33,7 +33,8 @@ It’s a tool to help people invest in what matters to them.
 
     Thymeleaf — dynamic server-side views
 
-    Chart.js — balance graph (real-time updates)
+       js — balance graph (real-time updates)
+    
 
 🔜 Planned:
 
