@@ -1,6 +1,6 @@
-package com.Ethica.demo.Service;
+package com.Ethica.demo.service;
 
-import com.Ethica.demo.Entity.StockDTO;
+import com.Ethica.demo.entity.StockDTO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;

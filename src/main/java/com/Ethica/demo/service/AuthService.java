@@ -1,7 +1,7 @@
-package com.Ethica.demo.Service;
+package com.Ethica.demo.service;
 
-import com.Ethica.demo.Entity.User;
-import com.Ethica.demo.Repo.UserRepository;
+import com.Ethica.demo.entity.User;
+import com.Ethica.demo.repo.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service

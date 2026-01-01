@@ -1,7 +1,7 @@
-package com.Ethica.demo.Controller;
+package com.Ethica.demo.controller;
 
-import com.Ethica.demo.Entity.StockDTO;
-import com.Ethica.demo.Service.StockService;
+import com.Ethica.demo.entity.StockDTO;
+import com.Ethica.demo.service.StockService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

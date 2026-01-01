@@ -1,7 +1,7 @@
-package com.Ethica.demo.Controller;
+package com.Ethica.demo.controller;
 
-import com.Ethica.demo.Entity.User;
-import com.Ethica.demo.Repo.UserRepository;
+import com.Ethica.demo.entity.User;
+import com.Ethica.demo.repo.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

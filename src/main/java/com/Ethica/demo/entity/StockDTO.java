@@ -1,6 +1,4 @@
-package com.Ethica.demo.Entity;
-
-import java.math.BigDecimal;
+package com.Ethica.demo.entity;
 
 public class StockDTO {
     private String symbol;

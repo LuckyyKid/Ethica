@@ -1,6 +1,6 @@
-package com.Ethica.demo.Controller;
-import com.Ethica.demo.Entity.User;
-import com.Ethica.demo.Service.AuthService;
+package com.Ethica.demo.controller;
+import com.Ethica.demo.entity.User;
+import com.Ethica.demo.service.AuthService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;

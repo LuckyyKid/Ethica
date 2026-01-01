@@ -1,9 +1,9 @@
-package com.Ethica.demo.Controller;
+package com.Ethica.demo.controller;
 
-import com.Ethica.demo.Entity.ClientPortfolio;
-import com.Ethica.demo.Entity.User;
-import com.Ethica.demo.Repo.PortfolioRepository;
-import com.Ethica.demo.Repo.UserRepository;
+import com.Ethica.demo.entity.ClientPortfolio;
+import com.Ethica.demo.entity.User;
+import com.Ethica.demo.repo.PortfolioRepository;
+import com.Ethica.demo.repo.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

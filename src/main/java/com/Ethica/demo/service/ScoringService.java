@@ -1,4 +1,4 @@
-package com.Ethica.demo.Service;
+package com.Ethica.demo.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;

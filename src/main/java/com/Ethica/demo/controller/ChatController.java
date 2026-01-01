@@ -1,10 +1,10 @@
-package com.Ethica.demo.Controller;
-import com.Ethica.demo.Entity.ClientPortfolio;
-import com.Ethica.demo.Entity.Trade;
-import com.Ethica.demo.Entity.User;
-import com.Ethica.demo.Repo.PortfolioRepository;
-import com.Ethica.demo.Repo.TradingRepository;
-import com.Ethica.demo.Service.AiService;
+package com.Ethica.demo.controller;
+import com.Ethica.demo.entity.ClientPortfolio;
+import com.Ethica.demo.entity.Trade;
+import com.Ethica.demo.entity.User;
+import com.Ethica.demo.repo.PortfolioRepository;
+import com.Ethica.demo.repo.TradingRepository;
+import com.Ethica.demo.service.AiService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

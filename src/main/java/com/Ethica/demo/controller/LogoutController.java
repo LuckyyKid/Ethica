@@ -1,4 +1,4 @@
-package com.Ethica.demo.Controller;
+package com.Ethica.demo.controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;

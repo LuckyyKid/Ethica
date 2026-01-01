@@ -1,9 +1,9 @@
-package com.Ethica.demo.Service;
+package com.Ethica.demo.service;
 
-import com.Ethica.demo.Entity.ClientPortfolio;
-import com.Ethica.demo.Entity.Trade;
-import com.Ethica.demo.Repo.PortfolioRepository;
-import com.Ethica.demo.Repo.TradingRepository;
+import com.Ethica.demo.entity.ClientPortfolio;
+import com.Ethica.demo.entity.Trade;
+import com.Ethica.demo.repo.PortfolioRepository;
+import com.Ethica.demo.repo.TradingRepository;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,6 +1,6 @@
-package com.Ethica.demo.Repo;
+package com.Ethica.demo.repo;
 
-import com.Ethica.demo.Entity.User;
+import com.Ethica.demo.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

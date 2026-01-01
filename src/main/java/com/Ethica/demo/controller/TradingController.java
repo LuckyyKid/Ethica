@@ -1,10 +1,10 @@
-package com.Ethica.demo.Controller;
+package com.Ethica.demo.controller;
 
-import com.Ethica.demo.Entity.ClientPortfolio;
-import com.Ethica.demo.Entity.Trade;
-import com.Ethica.demo.Entity.User;
-import com.Ethica.demo.Service.PortfolioService;
-import com.Ethica.demo.Service.TradeService;
+import com.Ethica.demo.entity.ClientPortfolio;
+import com.Ethica.demo.entity.Trade;
+import com.Ethica.demo.entity.User;
+import com.Ethica.demo.service.PortfolioService;
+import com.Ethica.demo.service.TradeService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

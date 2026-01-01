@@ -1,9 +1,8 @@
-package com.Ethica.demo.Controller;
+package com.Ethica.demo.controller;
 
-import com.Ethica.demo.Entity.User;
-import com.Ethica.demo.Service.ScoringService;
+import com.Ethica.demo.entity.User;
+import com.Ethica.demo.service.ScoringService;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
