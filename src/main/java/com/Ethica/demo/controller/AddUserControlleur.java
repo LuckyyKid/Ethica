@@ -35,7 +35,7 @@ public class AddUserControlleur {
             @RequestParam String email,
             @RequestParam String password,
             @RequestParam String age,
-            @RequestParam String investorProfil,
+            @RequestParam String investorProfile,
             @RequestParam String description
     ) {
         User user = new User();
@@ -44,7 +44,7 @@ public class AddUserControlleur {
         user.setEmail(email);
         user.setPassword(password);
         user.setAge(Integer.parseInt(age));
-        user.setInvestorProfil(investorProfil);
+        user.setInvestorProfil(investorProfile);
         user.setDescription(description);
 
         userRepository.save(user);
