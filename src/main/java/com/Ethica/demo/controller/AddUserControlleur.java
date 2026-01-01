@@ -56,6 +56,6 @@ public class AddUserControlleur {
 
         portfolioRepository.save(portfolio);
 
-        return "login";
+        return "redirect:/login";
     }
 }
