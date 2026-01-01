@@ -3,75 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Home | Ethica</title>
+    <title>Home | Ethica</title>
     <link rel="stylesheet" th:href="@{/css/index.css}" />
 </head>
 <body>
+
 <header>
     <nav class="navbar">
         <div class="logo">
             <a th:href="@{/index}" class="logo-text">Ethica</a>
         </div>
+
         <ul class="nav">
             <li><a th:href="@{/index}" class="active">Home</a></li>
             <li><a th:href="@{/about}">About Us</a></li>
             <li><a th:href="@{/news}">News Article</a></li>
-            <li><a th:href="@{/signUp}">Sign Up</a></li>
-            <li><a th:href="@{/login}">Sign In</a></li>
+
+            <!-- NON connecté -->
+            <li th:if="${session.userConnecte == null}">
+                <a th:href="@{/signUp}">Sign Up</a>
+            </li>
+            <li th:if="${session.userConnecte == null}">
+                <a th:href="@{/login}">Sign In</a>
+            </li>
+
+            <!-- CONNECTÉ -->
+            <li th:if="${session.userConnecte != null}">
+                <a th:href="@{/dashboard}">Dashboard</a>
+            </li>
+            <li th:if="${session.userConnecte != null}">
+                <a th:href="@{/logout}">Log out</a>
+            </li>
         </ul>
     </nav>
 </header>
 
 <main>
+
     <!-- Hero Section -->
     <section class="hero">
         <img th:src="@{/image/1.png}" alt="Banner Ethica">
+
         <h1>Invest according to who you are and what you stand for</h1>
         <p>A platform that aligns your values with your financial decisions.</p>
-        <button><a th:href="@{/signUp}">Create my profile</a></button>
+
+        <button>
+            <a th:href="${session.userConnecte != null} ? @{/dashboard} : @{/signUp}">
+                <span th:text="${session.userConnecte != null} ? 'Go to dashboard' : 'Create my profile'"></span>
+            </a>
+        </button>
     </section>
 
-    <!-- Theme Section with Glassmorphism -->
+    <!-- Theme Section -->
     <section class="theme-section">
         <div class="image">
-            <!-- Image à gauche -->
             <img th:src="@{/image/1.svg}" alt="Values" />
         </div>
         <div class="text">
             <h2>Give meaning to your investments</h2>
-            <p>Ethica allows you to filter the market based on what matters to you: religion, environment, health, inclusion, or simply logic.</p>
+            <p>
+                Ethica allows you to filter the market based on what matters to you:
+                religion, environment, health, inclusion, or simply logic.
+            </p>
         </div>
     </section>
 
-    <!-- How it Works Section -->
+    <!-- How it Works -->
     <section class="how-it-works" id="how">
         <h2>How it works</h2>
+
         <div class="steps">
-            <!-- Step 1: Create Profile -->
             <div class="step">
                 <img th:src="@{/image/2.webp}" alt="Create Profile" />
                 <h3>1. Create your profile</h3>
                 <p>A short questionnaire to identify your values and investor style.</p>
             </div>
 
-            <!-- Step 2: AI Analysis -->
             <div class="step">
                 <img th:src="@{/image/3.svg}" alt="AI Analysis" />
                 <h3>2. Personalized analysis</h3>
                 <p>Our AI selects assets that match your principles and risk tolerance.</p>
             </div>
 
-            <!-- Step 3: Invest Ethically -->
             <div class="step">
                 <img th:src="@{/image/3.webp}" alt="Invest Ethically" />
                 <h3>3. Invest with full consistency</h3>
-                <p>Follow a portfolio that is aligned, adaptive, and easy to understand at any time.</p>
+                <p>Follow a portfolio that is aligned, adaptive, and easy to understand.</p>
             </div>
         </div>
     </section>
+
 </main>
 
-<!-- Footer -->
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-left">
@@ -90,10 +113,11 @@
 
         <div class="footer-socials">
             <p>Follow us</p>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+            <a href="https://linkedin.com" target="_blank">LinkedIn</a> |
+            <a href="https://twitter.com" target="_blank">Twitter</a>
         </div>
     </div>
 </footer>
+
 </body>
 </html>
