@@ -20,7 +20,7 @@ public class StockNewsController {
     private static final String API_KEY = "a8vduqt5oket1g9ggk3lsahiunzgqjq2gwssen8s";
     private static final String API_BASE_URL = "https://stocknewsapi.com/api/v1";
 
-    @GetMapping("/Stocknews")
+    @GetMapping("/stock-news")
     public String stockNewsPage(
             @RequestParam(value = "ticker", required = false) String ticker,
             @RequestParam(value = "sentiment", required = false) String sentiment,
