@@ -58,7 +58,12 @@ public class TradingController {
         ClientPortfolio clientPortfolio =
                 portfolioService.getCurrentPortfolio(currentUser);
 
+        if (clientPortfolio == null) {
+            clientPortfolio = portfolioService.getOrCreatePortfolio(currentUser);
+        }
+
         trade.setPortfolio(clientPortfolio);
+
 
         tradeService.handleTradeSubmission(trade);
 
