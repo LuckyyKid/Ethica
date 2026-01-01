@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Ethica</title>
+    <link rel="stylesheet" th:href="@{/css/profile.css}">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a th:href="@{/}" class="logo-text">Ethica</a>
+        </div>
+        <ul class="nav">
+            <li><a th:href="@{/dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/clientPortfolio}">Portfolio</a></li>
+            <li><a th:href="@{/news}">News</a></li>
+            <li><a th:href="@{/profile}" class="active">Profile</a></li>
+            <li><a th:href="@{/logout}">Log out</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">Account Settings</span>
+            <h1>My <span class="highlight">Profile</span></h1>
+            <p>Keep your information up to date to receive personalized stock recommendations</p>
+        </div>
+    </section>
+
+    <!-- Profile Form Section -->
+    <section class="profile-section">
+        <div class="profile-layout">
+            <!-- Side Menu -->
+            <aside class="side-menu">
+                <nav class="side-nav">
+                    <a href="#personal" class="side-nav-item active">
+                        <span class="side-nav-icon">👤</span>
+                        Personal Info
+                    </a>
+                    <a href="#investment" class="side-nav-item">
+                        <span class="side-nav-icon">📊</span>
+                        Investment Profile
+                    </a>
+                    <a href="#about" class="side-nav-item">
+                        <span class="side-nav-icon">💬</span>
+                        About You
+                    </a>
+                </nav>
+
+                <div class="side-menu-divider"></div>
+
+                <nav class="side-nav">
+                    <a th:href="@{/reset-password}" class="side-nav-item danger">
+                        <span class="side-nav-icon">🔒</span>
+                        Reset Password
+                    </a>
+                    <a th:href="@{/logout}" class="side-nav-item danger">
+                        <span class="side-nav-icon">🚪</span>
+                        Log Out
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="profile-container">
+                <!-- Success Message -->
+                <div th:if="${success}" class="alert alert-success">
+                    <span class="alert-icon">✓</span>
+                    <span th:text="${success}">Profile updated successfully!</span>
+                </div>
+
+                <!-- Error Message -->
+                <div th:if="${error}" class="alert alert-error">
+                    <span class="alert-icon">!</span>
+                    <span th:text="${error}">An error occurred.</span>
+                </div>
+
+                <form th:action="@{/profile}" method="post" class="profile-form">
+                    <!-- Personal Information -->
+                    <div id="personal" class="form-section">
+                        <h2>
+                            <span class="section-icon">👤</span>
+                            Personal Information
+                        </h2>
+                        <p class="section-desc">Update your basic personal details</p>
+
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName"
+                                       th:value="${session.userConnecte.firstName}"
+                                       placeholder="John" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName"
+                                       th:value="${session.userConnecte.name}"
+                                       placeholder="Doe" required>
+                            </div>
+
+                            <div class="input-group full-width">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email"
+                                       th:value="${session.userConnecte.email}"
+                                       placeholder="john@example.com" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" name="age"
+                                       th:value="${session.userConnecte.age}"
+                                       min="18" max="120" placeholder="25" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Investment Profile -->
+                    <div id="investment" class="form-section">
+                        <h2>
+                            <span class="section-icon">📊</span>
+                            Investment Profile
+                        </h2>
+                        <p class="section-desc">This helps us recommend stocks that match your risk tolerance</p>
+
+                        <div class="investor-profiles">
+                            <label class="profile-card">
+                                <input type="radio" name="investorProfil" value="Conservative"
+                                       th:checked="${session.userConnecte.investorProfil == 'Conservative'}">
+                                <div class="profile-card-content">
+                                    <span class="profile-icon">🛡️</span>
+                                    <h3>Conservative</h3>
+                                    <p>Low risk, stable returns. Focus on blue-chip stocks and dividends.</p>
+                                </div>
+                            </label>
+
+                            <label class="profile-card">
+                                <input type="radio" name="investorProfil" value="Moderate"
+                                       th:checked="${session.userConnecte.investorProfil == 'Moderate'}">
+                                <div class="profile-card-content">
+                                    <span class="profile-icon">⚖️</span>
+                                    <h3>Moderate</h3>
+                                    <p>Balanced approach. Mix of growth stocks and stable investments.</p>
+                                </div>
+                            </label>
+
+                            <label class="profile-card">
+                                <input type="radio" name="investorProfil" value="Risky"
+                                       th:checked="${session.userConnecte.investorProfil == 'Risky'}">
+                                <div class="profile-card-content">
+                                    <span class="profile-icon">🚀</span>
+                                    <h3>Aggressive</h3>
+                                    <p>High risk, high reward. Focus on growth stocks and emerging markets.</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- About You -->
+                    <div id="about" class="form-section">
+                        <h2>
+                            <span class="section-icon">💬</span>
+                            About You
+                        </h2>
+                        <p class="section-desc">Tell us about your investment interests and goals</p>
+
+                        <div class="input-group">
+                            <label for="description">Description</label>
+                            <textarea id="description" name="description" rows="5"
+                                      placeholder="Tell us about your investment goals, interests, and what sectors you're most interested in..."
+                                      th:text="${session.userConnecte.description}"></textarea>
+                            <span class="input-hint">This helps our AI provide better personalized recommendations</span>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-actions">
+                        <a th:href="@{/dashboard}" class="btn-secondary">Cancel</a>
+                        <button type="submit" class="btn-primary">
+                            <span>Save Changes</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-left">
+            <h4>Ethica</h4>
+            <p>Invest in what you understand.</p>
+            <p class="copyright">&copy; 2025 Ethica Inc.</p>
+        </div>
+        <div class="footer-links">
+            <a th:href="@{/about}">About</a>
+            <a th:href="@{/news}">News</a>
+            <a th:href="@{/dashboard}">Dashboard</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -148,14 +148,14 @@ header {
 .hero-tag {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: rgba(124, 58, 237, 0.1);
-    border: 1px solid rgba(124, 58, 237, 0.3);
+    background: var(--accent-green-bg);
+    border: 1px solid rgba(16, 185, 129, 0.3);
     border-radius: var(--radius-full);
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--accent-secondary);
+    color: var(--accent-green);
     margin-bottom: 1rem;
 }
 
@@ -166,7 +166,7 @@ header {
 }
 
 .hero .highlight {
-    background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-green-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -200,7 +200,7 @@ header {
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
+    background: linear-gradient(90deg, var(--accent-green), var(--accent-green-light));
 }
 
 .search-form {
@@ -248,8 +248,8 @@ header {
 .input-group input:focus,
 .input-group select:focus {
     outline: none;
-    border-color: var(--accent-primary);
-    box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
+    border-color: var(--accent-green);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
 .input-group input::placeholder {
@@ -261,7 +261,7 @@ header {
     align-items: center;
     gap: 0.5rem;
     padding: 0.875rem 1.5rem;
-    background: var(--accent-primary);
+    background: var(--accent-green);
     border: none;
     border-radius: var(--radius-md);
     color: var(--bg-primary);
@@ -275,7 +275,7 @@ header {
 
 .search-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(74, 158, 255, 0.3);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
 }
 
 /* Advanced Filters */
@@ -418,8 +418,8 @@ header {
 
 .news-card:hover {
     transform: translateY(-4px);
-    border-color: rgba(74, 158, 255, 0.3);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+    border-color: rgba(16, 185, 129, 0.3);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3), 0 0 40px rgba(16, 185, 129, 0.1);
 }
 
 .card-image {
@@ -448,7 +448,7 @@ header {
 .card-source {
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--accent-primary);
+    color: var(--accent-green);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -527,7 +527,7 @@ header {
     gap: 0.5rem;
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--accent-primary);
+    color: var(--accent-green);
     transition: all var(--transition-fast);
 }
 
@@ -736,5 +736,5 @@ header {
 }
 
 ::selection {
-    background: rgba(124, 58, 237, 0.3);
+    background: rgba(16, 185, 129, 0.3);
 }

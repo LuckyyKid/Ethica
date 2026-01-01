@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/dashboard.css}"/>
     <title>Dashboard | Ethica</title>
-
 </head>
 <body>
 <header>
@@ -12,19 +13,18 @@
             <a th:href="@{/}" class="logo-text">Ethica</a>
         </div>
         <ul class="nav">
-            <li><a th:href="@{/index}">Home</a></li>
+            <li><a th:href="@{/dashboard}" class="active">Dashboard</a></li>
             <li><a th:href="@{/about}">About Us</a></li>
-            <li><a th:href="@{/news}">News Article</a></li>
-            <li><a th:href="@{/signUp}">Sign Up</a></li>
+            <li><a th:href="@{/news}">News</a></li>
+            <li><a th:href="@{/clientPortfolio}">Portfolio</a></li>
             <li><a th:href="@{/logout}">Log out</a></li>
         </ul>
     </nav>
-
 </header>
-<div class="Welcome">
-    <h2 th:text="'Hello ' + ${session.userConnecte.firstName} + ', welcome on Ethica'"> Welcome on Ethica </h2>
-</div>
 
+<div class="Welcome">
+    <h2 th:text="'Hello ' + ${session.userConnecte.firstName} + ', welcome on Ethica'">Welcome on Ethica</h2>
+</div>
 
 <main class="dashboard">
 
@@ -37,22 +37,22 @@
             <button type="submit">Search</button>
         </form>
     </section>
-    <div class="result" th:if="${stock!= null}">
-        <h1>Result for <span th:text="${stock.symbol}" ></span></h1>
+
+    <div class="result" th:if="${stock != null}">
+        <h1>Result for <span th:text="${stock.symbol}"></span></h1>
         <p>Price: <span th:text="${stock.price + ' $'}"></span></p>
-        <p>percent Change: <span th:text="${stock.percentChange + ' %'}"></span></p>
+        <p>Percent Change: <span th:text="${stock.percentChange + ' %'}"></span></p>
         <div class="buttons">
             <a th:href="@{/trading}" class="btn">Buy</a>
             <a th:href="@{/trading}" class="btn">Sell</a>
         </div>
     </div>
-    <p th:if="${error}" th:text="${error}"></p>
+    <p th:if="${error}" th:text="${error}" class="error-message"></p>
 
     <!-- Latest Reuters Articles -->
     <section id="articles-recents" class="news-section">
         <h2>Financial News (Reuters)</h2>
         <div class="articles-grid">
-
             <div class="news-card">
                 <h3>Article Title</h3>
                 <p>Short summary or intro of the article...</p>
@@ -63,13 +63,62 @@
 
     <!-- Access to features (redirections) -->
     <section id="redirect-sections" class="menu-links">
-        <h2>Available features</h2>
+        <h2>Available Features</h2>
         <ul>
-            <li><a href="/profile">Complete my personality profile</a></li>
-            <li><a href="/clientPortfolio">Manage my portfolio</a></li>
-            <li><a th:href="@{/stockReco}">Top assets for my profile</a></li>
-            <li><a href="http://localhost:5173/">Chat with the financial AI</a></li>
-            <li><a th:href="@{/trading}">Submit a buy/sell decision</a></li>
+            <li>
+                <a th:href="@{/profile}">
+                    <span class="feature-icon"></span>
+                    Complete my personality profile
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/clientPortfolio}">
+                    <span class="feature-icon"></span>
+                    Manage my portfolio
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/stockReco}">
+                    <span class="feature-icon"></span>
+                    Top assets for my profile
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:5173/" target="_blank">
+                    <span class="feature-icon"></span>
+                    Chat with the financial AI
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/trading}">
+                    <span class="feature-icon"></span>
+                    Submit a buy/sell decision
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/stock-news}">
+                    <span class="feature-icon"></span>
+                    Search news by ticker
+                </a>
+            </li>
         </ul>
     </section>
 </main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-left">
+            <h4>Ethica</h4>
+            <p>Invest in what you understand.</p>
+            <p class="copyright">&copy; 2025 Ethica Inc.</p>
+        </div>
+        <div class="footer-links">
+            <a th:href="@{/about}">About</a>
+            <a th:href="@{/news}">News</a>
+            <a th:href="@{/profile}">Profile</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
