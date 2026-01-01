@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My portfolio - Ethica</title>
+    <title>My Portfolio - Ethica</title>
     <link rel="stylesheet" th:href="@{/css/clientPortfolio.css}">
 </head>
 <body>
@@ -24,18 +24,36 @@
 </header>
 
 <main class="dashboard-container">
-    <!-- Graph -->
+    <!-- Graph Panel -->
     <div class="left-panel">
-        <h2>Evolution of your balance</h2>
-        <div class="chart-container">
+        <h2><span class="dot"></span> Evolution of your balance</h2>
+
+        <!-- Empty state when no trades -->
+        <div th:if="${#lists.isEmpty(trades)}" class="empty-chart-state">
+            <div class="empty-icon">📊</div>
+            <p>No portfolio history yet</p>
+            <span>Start trading to see your balance evolution</span>
+        </div>
+
+        <!-- Chart container - only show when there are trades -->
+        <div th:unless="${#lists.isEmpty(trades)}" class="chart-container">
             <canvas id="myChart"></canvas>
         </div>
     </div>
 
-    <!-- trades history -->
+    <!-- Trades History Panel -->
     <div class="right-panel">
         <h2>Most recent Transactions</h2>
-        <div class="table-wrapper">
+
+        <!-- Empty state when no transactions -->
+        <div th:if="${#lists.isEmpty(trades)}" class="empty-transactions-state">
+            <div class="empty-icon">📋</div>
+            <p>No transactions yet</p>
+            <span>Your trading history will appear here</span>
+        </div>
+
+        <!-- Table - only show when there are trades -->
+        <div th:unless="${#lists.isEmpty(trades)}" class="table-wrapper">
             <table class="trade-table">
                 <thead>
                 <tr>
@@ -47,18 +65,23 @@
                 </tr>
                 </thead>
                 <tbody id="transactionsBody">
-                <tr th:each="trade, iterStat : ${trades}" th:classappend="${iterStat.index ge 5} ? 'hidden-row hidden' : ''">
-                    <td th:text="${trade.buy} ? 'Buy' : 'Sell'" th:class="${trade.buy} ? 'type-buy' : 'type-sell'"></td>
+                <tr th:each="trade, iterStat : ${trades}"
+                    th:classappend="${iterStat.index ge 5} ? 'hidden-row hidden' : ''">
+                    <td th:text="${trade.buy} ? 'Buy' : 'Sell'"
+                        th:class="${trade.buy} ? 'type-buy' : 'type-sell'"></td>
                     <td th:text="${trade.symbol}" class="symbol"></td>
                     <td th:text="${trade.quantity}"></td>
-                    <td class="value" th:text="${'$' + #numbers.formatDecimal(trade.quantity * trade.priceAtExecution, 1, 2)}"></td>
-                    <td th:text="${#temporals.format(trade.timestamp, 'dd/MM/yyyy HH:mm')}" class="date"></td>
+                    <td class="value"
+                        th:text="${'$' + #numbers.formatDecimal(trade.quantity * trade.priceAtExecution, 1, 2)}"></td>
+                    <td th:text="${#temporals.format(trade.timestamp, 'dd/MM/yyyy HH:mm')}"
+                        class="date"></td>
                 </tr>
                 </tbody>
             </table>
         </div>
 
-        <button id="showAllBtn" class="btn-show-all" th:if="${#lists.size(trades) gt 5}">
+        <button id="showAllBtn" class="btn-show-all"
+                th:if="${not #lists.isEmpty(trades) and #lists.size(trades) gt 5}">
             <span id="btnText">Show all transactions</span>
             <span id="btnCount" th:text="'(' + ${#lists.size(trades)} + ')'"></span>
         </button>
@@ -71,9 +94,14 @@
     </div>
 </main>
 
+<!-- Pass chart data from backend to JavaScript -->
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var balancesJson = /*[[${balancesJson}]]*/ '[]';
+    /*]]>*/
+</script>
+
 <script th:src="@{/js/chart.min.js}" defer></script>
-
-
 <script th:src="@{/js/transactions.js}" defer></script>
 <script th:src="@{/js/portfolioChart.js}" defer></script>
 
