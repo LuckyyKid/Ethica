@@ -26,22 +26,29 @@ public class SearchStockControlleur {
             Model model
     ) {
 
-        if (ticker != null && !ticker.isBlank()) {
-            try {
-                StockDTO stock = stockService.getStock(ticker.toUpperCase());
+        if (ticker == null || ticker.isBlank()) {
+            return DASHBOARD_VIEW;
+        }
 
-                if (stock == null || stock.getPrice() == 0.0) {
-                    model.addAttribute("error", "No result found for: " + ticker);
-                } else {
-                    model.addAttribute("stock", stock);
-                }
+        try {
+            StockDTO stock = stockService.getStock(ticker.toUpperCase().trim());
 
-            } catch (IOException e) {
+            // Cas API OK mais ticker invalide
+            if (stock == null || stock.getSymbol() == null) {
                 model.addAttribute(
                         "error",
-                        "An error occurred while retrieving data for: " + ticker
+                        "The ticker you entered is not valid. Please try again."
                 );
+            } else {
+                model.addAttribute("stock", stock);
             }
+
+        } catch (Exception e) {
+            // ⚠ Catch LARGE volontairement pour éviter TOUT 500
+            model.addAttribute(
+                    "error",
+                    "The ticker you entered is not valid. Please try again."
+            );
         }
 
         return DASHBOARD_VIEW;
