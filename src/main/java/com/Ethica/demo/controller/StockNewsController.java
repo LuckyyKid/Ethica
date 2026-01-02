@@ -54,7 +54,7 @@ public class StockNewsController {
         model.addAttribute("currentItems", items);
         model.addAttribute("currentPage", page);
 
-        return "stockNews";
+        return "stock-news";
     }
 
     private List<Map<String, String>> fetchTickerNews(String ticker, String sentiment, String type,
