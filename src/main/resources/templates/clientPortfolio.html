@@ -2,7 +2,8 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0a0b">
     <title>My Portfolio - Ethica</title>
     <link rel="stylesheet" th:href="@{/css/clientPortfolio.css}">
 </head>
@@ -30,14 +31,15 @@
 
         <!-- Empty state when no trades -->
         <div th:if="${#lists.isEmpty(trades)}" class="empty-chart-state">
-            <div class="empty-icon">📊</div>
+            <div class="empty-icon"></div>
             <p>No portfolio history yet</p>
             <span>Start trading to see your balance evolution</span>
         </div>
 
         <!-- Chart container - only show when there are trades -->
+        <!-- Pass data via data-* attribute instead of inline script -->
         <div th:unless="${#lists.isEmpty(trades)}" class="chart-container">
-            <canvas id="myChart"></canvas>
+            <canvas id="myChart" th:data-balances="${balancesJson}"></canvas>
         </div>
     </div>
 
@@ -94,16 +96,10 @@
     </div>
 </main>
 
-<!-- Pass chart data from backend to JavaScript -->
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    var balancesJson = /*[[${balancesJson}]]*/ '[]';
-    /*]]>*/
-</script>
-
-<script th:src="@{/js/chart.min.js}" defer></script>
-<script th:src="@{/js/transactions.js}" defer></script>
-<script th:src="@{/js/portfolioChart.js}" defer></script>
+<!-- External scripts only - no inline scripts -->
+<script th:src="@{/js/chart.min.js}"></script>
+<script th:src="@{/js/transactions.js}"></script>
+<script th:src="@{/js/portfolioChart.js}"></script>
 
 </body>
 </html>

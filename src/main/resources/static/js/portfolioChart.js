@@ -1,12 +1,15 @@
 /**
  * ETHICA - Portfolio Chart
- * Uses balancesJson data passed from backend via Thymeleaf
+ * Reads data from canvas data-balances attribute (CSP compliant)
  */
 document.addEventListener('DOMContentLoaded', function () {
     var canvas = document.getElementById('myChart');
 
-    // Exit if no canvas (empty state is shown instead)
-    if (!canvas) return;
+    // Exit if no canvas
+    if (!canvas) {
+        console.log('No chart canvas found');
+        return;
+    }
 
     // Check if Chart.js is loaded
     if (typeof Chart === 'undefined') {
@@ -14,16 +17,18 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-    // Check if we have data from backend
-    if (typeof balancesJson === 'undefined' || !balancesJson) {
-        console.log('No portfolio data available');
+    // Get data from data-balances attribute
+    var balancesJson = canvas.getAttribute('data-balances');
+
+    if (!balancesJson) {
+        console.log('No portfolio data available (no data-balances attribute)');
         return;
     }
 
-    // Parse the JSON data from backend
+    // Parse the JSON data
     var chartData;
     try {
-        chartData = typeof balancesJson === 'string' ? JSON.parse(balancesJson) : balancesJson;
+        chartData = JSON.parse(balancesJson);
     } catch (e) {
         console.error('Error parsing balancesJson:', e);
         return;
@@ -34,6 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('Empty portfolio data');
         return;
     }
+
+    console.log('Chart data loaded:', chartData.length, 'points');
 
     // Extract labels (dates) and values (balances) from the data
     var labels = chartData.map(function(point) {
@@ -123,7 +130,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         color: 'rgba(255, 255, 255, 0.4)',
                         maxRotation: 45,
                         minRotation: 0,
-                        // Show fewer labels if too many data points
                         maxTicksLimit: 12
                     }
                 },
@@ -142,10 +148,11 @@ document.addEventListener('DOMContentLoaded', function () {
                             return '$' + value.toFixed(0);
                         }
                     },
-                    // Start from 0 or slightly below min value
                     beginAtZero: false
                 }
             }
         }
     });
+
+    console.log('Chart rendered successfully');
 });
