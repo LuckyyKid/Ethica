@@ -2,74 +2,158 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/signup.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Sign Up - Ethica</title>
+    <link rel="stylesheet" th:href="@{/css/signup.css}">
 </head>
 <body>
+
 <header>
     <nav class="navbar">
         <div class="logo">
             <a th:href="@{/}" class="logo-text">Ethica</a>
         </div>
         <ul class="nav">
-            <li><a th:href="@{/index}">Home</a></li>
-            <li><a th:href="@{/about}">About Us</a></li>
-            <li><a th:href="@{/news}">News Article</a></li>
-            <li><a th:href="@{/signUp}">Sign Up</a></li>
-            <li><a th:href="@{/login}">Sign In</a></li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/about}">About</a></li>
+            <li><a th:href="@{/news}">News</a></li>
+            <li><a th:href="@{/signUp}" class="active">Sign Up</a></li>
+            <li><a th:href="@{/login}">Login</a></li>
         </ul>
     </nav>
 </header>
 
+<main class="form">
+    <form id="signUpForm" th:action="@{/signUp}" method="post">
 
-<div class="form">
-    <form id="signUpForm" action="/signUp" method="post">
+        <!-- Title -->
+        <h1 class="form-title">Create your account</h1>
+        <p class="form-subtitle">Join Ethica and start investing according to your values</p>
 
-        <label for="FirstName">First Name :</label>
-        <input type="text" id="FirstName" name="firstName" required><br>
+        <!-- Error Message (email already exists) -->
+        <div th:if="${error}" class="error-message">
+            <span class="error-icon"></span>
+            <span th:text="${error}">Error message</span>
+        </div>
 
-        <label for="LastName">Last Name :</label>
-        <input type="text" id="LastName" name="lastName" required><br>
+        <!-- Form Grid -->
+        <div class="form-grid">
 
-        <label for="Email">Email :</label>
-        <input type="email" id="Email" name="email" required><br>
+            <!-- First Name -->
+            <div class="input-group">
+                <label for="firstName">First Name</label>
+                <input type="text"
+                       id="firstName"
+                       name="firstName"
+                       placeholder="John"
+                       th:value="${firstName}"
+                       required
+                       autocomplete="given-name">
+            </div>
 
-        <label for="password">Password :</label>
-        <input type="password" id="password" name="password" required><br>
+            <!-- Last Name -->
+            <div class="input-group">
+                <label for="lastName">Last Name</label>
+                <input type="text"
+                       id="lastName"
+                       name="lastName"
+                       placeholder="Doe"
+                       th:value="${lastName}"
+                       required
+                       autocomplete="family-name">
+            </div>
 
-        <label for="Age">Age :</label>
-        <input type="number" id="Age" name="age" required><br>
+            <!-- Email - Full Width (highlighted if error) -->
+            <div class="input-group full-width" th:classappend="${error} ? 'has-error' : ''">
+                <label for="email">Email</label>
+                <input type="email"
+                       id="email"
+                       name="email"
+                       placeholder="you@example.com"
+                       required
+                       autocomplete="email"
+                       inputmode="email"
+                       th:classappend="${error} ? 'input-error' : ''">
+                <span th:if="${error}" class="field-hint">Please use a different email address</span>
+            </div>
 
-        <label for="Investor Profile">Investor Profile:</label>
-        <select name="investorProfile" id="Investor Profile" required>
-            <option value="Conservative">Conservative</option>
-            <option value="Moderate">Moderate</option>
-            <option value="Risky">Risky</option>
-        </select><br>
+            <!-- Password - Full Width -->
+            <div class="input-group full-width">
+                <label for="password">Password</label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       placeholder="••••••••"
+                       required
+                       autocomplete="new-password"
+                       minlength="8">
+            </div>
 
-        <label for="Description">Give us a quick Description of yourself :</label><br>
-        <textarea name="description" id="Description" rows="4" cols="50" required></textarea><br>
+            <!-- Age -->
+            <div class="input-group">
+                <label for="age">Age</label>
+                <input type="number"
+                       id="age"
+                       name="age"
+                       placeholder="25"
+                       th:value="${age}"
+                       required
+                       min="18"
+                       max="120"
+                       inputmode="numeric">
+            </div>
 
-        <button type="submit">Sign Up</button>
+            <!-- Investor Profile -->
+            <div class="input-group">
+                <label for="investorProfile">Investor Profile</label>
+                <select name="investorProfile" id="investorProfile" required>
+                    <option value="" disabled th:selected="${investorProfile == null}">Select profile</option>
+                    <option value="Conservative" th:selected="${investorProfile == 'Conservative'}">Conservative</option>
+                    <option value="Moderate" th:selected="${investorProfile == 'Moderate'}">Moderate</option>
+                    <option value="Risky" th:selected="${investorProfile == 'Risky'}">Risky</option>
+                </select>
+            </div>
+
+            <!-- Description - Full Width -->
+            <div class="input-group full-width">
+                <label for="description">About you</label>
+                <textarea name="description"
+                          id="description"
+                          placeholder="Tell us a bit about yourself and your investment goals..."
+                          rows="4"
+                          required
+                          th:text="${description}"></textarea>
+            </div>
+
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Create Account</button>
+
+        <!-- Footer Link -->
+        <p class="form-footer">
+            Already have an account? <a th:href="@{/login}">Sign in</a>
+        </p>
     </form>
+</main>
 
-</div>
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-left">
             <h4>Ethica</h4>
             <p>&copy; 2025 Ethica Inc. All rights reserved.</p>
         </div>
-
         <div class="footer-links">
             <ul>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/privacy">Privacy Policy</a></li>
-                <li><a href="/terms">Terms of Use</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <li><a th:href="@{/about}">About Us</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Contact</a></li>
             </ul>
         </div>
-
         <div class="footer-socials">
             <p>Follow us</p>
             <a href="https://linkedin.com" target="_blank">LinkedIn</a> |
@@ -77,5 +161,6 @@
         </div>
     </div>
 </footer>
+
 </body>
 </html>

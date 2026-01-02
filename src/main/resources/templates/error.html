@@ -1,23 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error | Ethica</title>
+    <link rel="stylesheet" th:href="@{/css/error.css}">
 </head>
 <body>
-<h1>Something went wrong</h1>
 
-<p th:if="${status}">
-    Status: <span th:text="${status}"></span>
-</p>
+<div class="error-card">
+    <!-- Error Icon -->
+    <div class="error-icon"></div>
 
-<p th:if="${error}">
-    Error: <span th:text="${error}"></span>
-</p>
+    <!-- Title -->
+    <h1>Something went wrong</h1>
+    <p class="error-subtitle">We encountered an unexpected error</p>
 
-<p th:if="${message}">
-    Message: <span th:text="${message}"></span>
-</p>
+    <!-- Error Details -->
+    <div class="error-details" th:if="${status != null or error != null or message != null}">
 
-<a href="/">Go back home</a>
+        <div class="error-item" th:if="${status}">
+            <span class="error-label">Status</span>
+            <span class="error-value status-code" th:text="${status}">500</span>
+        </div>
+
+        <div class="error-item" th:if="${error}">
+            <span class="error-label">Error</span>
+            <span class="error-value" th:text="${error}">Internal Server Error</span>
+        </div>
+
+        <div class="error-item" th:if="${message}">
+            <span class="error-label">Message</span>
+            <span class="error-value" th:text="${message}">An unexpected error occurred</span>
+        </div>
+
+    </div>
+
+    <!-- Back to Home Button -->
+    <a href="/" class="btn-home">
+        <span class="btn-icon">←</span>
+        Go back home
+    </a>
+
+    <!-- Footer -->
+    <p class="error-footer">
+        Need help? <a href="/contact">Contact support</a>
+    </p>
+</div>
+
 </body>
 </html>
